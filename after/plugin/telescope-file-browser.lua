@@ -1,25 +1,21 @@
 require("telescope").setup {
-  extensions = {
-    file_browser = {
-      theme = "dropdown",
-      -- disables netrw and use telescope-file-browser in its place
-      hijack_netrw = true,
-      mappings = {
-        ["i"] = {
-          -- your custom insert mode mappings
+    extensions = {
+        file_browser = {
+            theme = "ivy",
+            -- disables netrw and use telescope-file-browser in its place
+            hijack_netrw = true,
+            mappings = {
+                ["i"] = {
+                    -- your custom insert mode mappings
+                    ["C-j"] = "move_selection_next",
+                    ["C-k"]= "move_selection_previous",
+                },
+                ["n"] = {
+                    -- your custom normal mode mappings
+                },
+            },
         },
-        ["n"] = {
-          -- your custom normal mode mappings
-        },
-      },
     },
-  },
 }
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<space>fb",
-  ":Telescope file_browser<CR>",
-  { noremap = true }
-)
 

@@ -1,5 +1,3 @@
-
-
 const component = () => {
     const john = "test";
     john.split("")
@@ -8,4 +6,6 @@ const component = () => {
     )
 }
 function sasS(){
+   const t = ""
+}
 

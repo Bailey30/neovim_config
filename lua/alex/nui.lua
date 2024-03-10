@@ -1,0 +1,78 @@
+-- local Popup = require("nui.popup")
+-- local event = require("nui.utils.autocmd").event
+--
+--
+-- local popup = Popup({
+--     -- anchor = "SE",
+--  position ={
+--      row= 2, col ="95%" 
+--  } ,
+--   size = {
+--     width = 20,
+--     height = 2,
+--   },
+--   enter = false,
+--   focusuble = false,
+--   zindex = 2,
+--   -- relative = win  ,
+--   border = {
+--     padding = {
+--       top = 0,
+--       bottom = 0,
+--       left = 0,
+--       right = 0,
+--     },
+--     style = "rounded",
+--     -- text = {
+--     --   top = " I am top title ",
+--     --   top_align = "center",
+--     --   bottom = "I am bottom title",
+--     --   bottom_align = "left",
+--     -- },
+--   },
+--   buf_options = {
+--     modifiable = true,
+--     readonly = false,
+--   },
+--   win_options = {
+--     -- winblend = 100,
+--     winhighlight = "Normal:Soft_Red,FloatBorder:Soft_Red",
+--   },
+-- })
+--
+-- -- popup:mount()
+-- -- popup:hide()
+-- print("helo")
+--
+
+-- local function onCmdEnter()
+--     popup:show()
+-- end
+-- popup:show()
+-- popup:show()
+-- popup:hide()
+    -- vim.api.nvim_buf_set_lines(popup.bufnr, 0, 1, true, { "COMMAND" })
+
+-- vim.api.nvim_command("autocmd CmdlineEnter * lua onCmdEnter()")
+-- vim.api.nvim_create_autocmd('CmdlineEnter', {
+--   callback = function()
+--     local old_mode = vim.v.event.old_mode
+--     local new_mode = vim.v.event.new_mode
+--     print("new", new_mode)
+--     print("old", old_mode)
+--     print("test")
+--     -- popup:show()
+--     vim.api.nvim_buf_set_lines(popup.bufnr, 0, 1, true, { "COMMAND" })
+--     -- popup:mount()
+--     -- if new_mode == "c" then
+--     -- else
+--         -- popup:unmount()
+--     -- end
+--   end
+-- })
+-- vim.api.nvim_create_autocmd("CmdlineLeave",{
+--     callback = function()
+--     -- popup:hide()
+--     vim.api.nvim_buf_set_lines(popup.bufnr, 0, 1, true, { "COMMAND" })
+-- end
+-- })

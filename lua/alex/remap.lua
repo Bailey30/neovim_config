@@ -47,9 +47,11 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end)
+-- vim.keymap.set("n", "<leader><leader>", function()
+--     vim.cmd("so")
+-- end)
+--
+vim.keymap.set("n", "<leader><leader>", "/")
 
     -- WINDOW PANES
     --    vim.keymap.set("n", "ss", ":split<Return>", opts)
@@ -63,4 +65,18 @@ end)
     vim.keymap.set('n', '<A-,>', ':bprev<CR>')
     vim.keymap.set('n', '<A-.>', ':bnext<CR>')
     vim.keymap.set('n', '<A-q>', ':bd<CR>')
+
+    -- split and navigate panes
+   vim.keymap.set("n", "ss", ":split<Return>", opts)
+   vim.keymap.set("n", "sv", ":vsplit<Return>", opts)
+   vim.keymap.set("n", "sh", "<C-w>h")
+   vim.keymap.set("n", "sk", "<C-w>k")
+   vim.keymap.set("n", "sj", "<C-w>j")
+   vim.keymap.set("n", "sl", "<C-w>l")
+    -- jump to start and end of line
+   vim.keymap.set("n", "<A-l>", "$")
+   vim.keymap.set("n", "<A-h>", "_")
+
+
+
 

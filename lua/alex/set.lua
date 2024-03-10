@@ -19,6 +19,7 @@ vim.opt.undofile = true
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
+vim.opt.ignorecase = true
 
 vim.opt.termguicolors = true
 
@@ -28,5 +29,6 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
+vim.opt.spelllang = 'en_us'
 --vim.opt.colorcolumn = "80"
 vim.lsp.set_log_level("debug")

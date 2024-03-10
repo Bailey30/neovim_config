@@ -1,1 +1,2 @@
---vim.keymap.set({"n", "v"} ,"<C-b>", ":Neotree position=current toggle<CR>")
+
+vim.keymap.set({"n", "v"} ,"<C-b>", ":Neotree position=float toggle<CR>")

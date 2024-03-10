@@ -1,3 +1,6 @@
+-- :Mason to open window
+-- "i" to install
+-- https://github.com/williamboman/mason.nvim?tab=readme-ov-file
 local lsp_zero = require('lsp-zero')
 
 lsp_zero.on_attach(function(_, bufnr)
@@ -19,7 +22,7 @@ end)
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'rust_analyzer', "gopls", "psalm", "html", "cssls", "yamlls", "jsonls"  },
+    ensure_installed = { 'tsserver', 'rust_analyzer', "gopls", "psalm", "html", "cssls", "yamlls", "jsonls", "lua_ls", "java_language_server"  },
     handlers = {
         lsp_zero.default_setup,
         lua_ls = function()
