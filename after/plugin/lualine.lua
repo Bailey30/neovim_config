@@ -94,7 +94,8 @@ local identifier_fg = format(identifier.fg)
 -- local termCursorNC = get_hl("PmenuThumb")
 -- local pmenuThumb_bg = format(termCursorNC.bg)
 local statusLineNC = get_hl("StatusLineNC")
-local statusLine_bg = statusLineNC.bg and format(statusLineNC.bg) or nil
+-- local statusLine_bg = statusLineNC.bg and format(statusLineNC.bg) or normal_bg
+local statusLine_bg = normal_bg
 -- local cursorLine = get_hl("CursorLine")
 -- local cursorLine_bg = format(cursorLine.fg)
 -- print(cursorLine_bg)
@@ -115,7 +116,7 @@ local function getTheme()
     custom_gruvbox.insert.a.fg = normal_bg
     custom_gruvbox.insert.a.bg = '#D3869B'
 
-    custom_gruvbox.insert.b.fg = string_fg
+    custom_gruvbox.insert.b.fg = normal_fg
     custom_gruvbox.insert.b.bg = statusLine_bg
 
     custom_gruvbox.insert.c.fg = normal_bg
@@ -125,7 +126,7 @@ local function getTheme()
     custom_gruvbox.visual.a.fg = normal_bg
     custom_gruvbox.visual.a.bg = orange
 
-    custom_gruvbox.visual.b.fg = string_fg
+    custom_gruvbox.visual.b.fg = normal_fg
     custom_gruvbox.visual.b.bg = statusLine_bg
 
     custom_gruvbox.visual.c.fg = normal_bg
@@ -135,7 +136,7 @@ local function getTheme()
     custom_gruvbox.command.a.fg = normal_bg
     custom_gruvbox.command.a.bg = command_green
 
-    custom_gruvbox.command.b.fg = identifier_fg
+    custom_gruvbox.command.b.fg = normal_fg
     custom_gruvbox.command.b.bg = statusLine_bg
 
     custom_gruvbox.command.c.fg = normal_bg
@@ -158,15 +159,33 @@ require('lualine').setup {
     options = {
         theme = getTheme(),
         component_separators = "|",
-        -- section_separators = "",
+        section_separators = "",
     },
     sections = {
         lualine_c = {
             {
-                get_current_file_location
+                -- get_current_file_location
+                "filename",
+                path = 1
             }
+        },
+        lualine_b = {
+            { 'diff',
+                -- colored = true,
+                -- color = "normal_bg",
+                diff_color = {
+                    -- Same color values as the general color option can be used here.
+                    -- added    = 'GreenFg',  -- Changes the diff's added color
+                    -- modified = 'OrangeFg', -- Changes the diff's modified color
+                    -- removed  = 'PinkFg',   -- Changes the diff's removed color you
+                },
+            }, {
+            "branch"
+        }, {
+            "diagnostics"
         }
-    }
+        },
+    },
 }
 
 

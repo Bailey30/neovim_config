@@ -12,25 +12,46 @@ if !has('gui_running')
   endif
 endif
 
+
+let s:green = "04F930"
+let s:bg = "333333"
+let s:purple = "947CEC"
+let s:orange = "FA4B12"
+let s:brown = "A57159"
+let s:grey = "C3CBD5"
+let s:moave = "976775"
+let s:deepmoave = "463848"
+let s:blue = "084EFC"
+let s:lightgrey = "DFDFDF"
+let s:purple2 = "DA93FF"
+let s:yellow = "FAE013"
+let s:coral = "F04C36"
+let s:darkgrey = "262626"
+let s:green2 = "22A557"
+let s:offwhite = "FEFEFE"
+let s:grey3 = "A7A7A7"
+let s:grey4 = "2A2A2C"
+
 " GUI color definitions
-let s:gui00 = "322931"
+let s:gui00 = s:grey3
 let s:gui01 = "433b42"
 let s:gui02 = "5c545b"
 let s:gui03 = "797379"
 let s:gui04 = "989498"
-let s:gui05 = "b9b5b8"
-let s:gui06 = "d5d3d5"
+let s:gui05 = s:grey4
+let s:gui06 = s:grey4
 let s:gui07 = "ffffff"
-let s:gui08 = "dd464c" "red"
+let s:gui08 = s:grey4
 let s:gui09 = "fd8b19"
-let s:gui0A = "fdcc59"
-let s:gui0B = "8fc13e" "green"
-let s:gui0C = "149b93"
-let s:gui0D = "1290bf"
-let s:gui0E = "c85e7c"
-let s:gui0F = "b33508"
+let s:gui0A = s:grey4
+let s:gui0B =  s:green
+let s:gui0C = s:grey4
+let s:gui0D = s:grey4
+let s:gui0E = s:offwhite
+let s:gui0F = s:darkgrey
 let s:guiYellow = "dfaf00"
-" #dfaf00
+" #dfaf00o
+"
 
 " Terminal color definitions
 let s:cterm00 = "00"
@@ -177,6 +198,7 @@ call <sid>hi("VertSplit",     s:gui00, "none", "none", "none", "none")
 call <sid>hi("ColorColumn",   "", s:gui01, "", s:cterm01, "none")
 call <sid>hi("CursorColumn",  "", s:gui01, "", s:cterm01, "none")
 call <sid>hi("CursorLine",    "", s:gui01, "", s:cterm01, "none")
+	highlight CursorLine guifg=NONE guibg=NONE gui=reverse ctermfg=4 ctermbg=1 cterm=reverse
 call <sid>hi("CursorLineNr",  s:gui03, s:gui01, s:cterm03, s:cterm01, "")
 call <sid>hi("PMenu",         s:gui04, s:gui01, s:cterm04, s:cterm01, "none")
 call <sid>hi("PMenuSel",      s:gui01, s:gui04, s:cterm01, s:cterm04, "")

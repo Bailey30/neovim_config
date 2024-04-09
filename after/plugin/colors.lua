@@ -19,7 +19,7 @@ function ColorMyPencils(color)
 
     -- color of sidebar next to numbers
     -- vim.cmd("highlight SignColumn guibg=#282828") -- gruvbox medium
-    vim.cmd("highlight SignColumn guibg=#1D2021") -- gruvbox hard
+    -- vim.cmd("highlight SignColumn guibg=#1D2021") -- gruvbox hard
     --
     -- removes background
     -- vim.api.nvim_set_hl(0, "normal", {bg = "none"})
@@ -31,8 +31,13 @@ function ColorMyPencils(color)
 
     --colors for mode change bars
     vim.cmd('hi PinkLine guibg=#DD3869 guifg=#DD3869')
+    vim.cmd('hi PinkFg guifg=#DD3869')
     vim.cmd('hi GreenLine guibg=#B8BB26 guifg=#B8BB26')
+    vim.cmd('hi GreenFg guifg=#B8BB26')
     vim.cmd('hi OrangeLine guibg=#FE8112 guifg=#FE8112')
+    vim.cmd('hi OrangeFg guifg=#FE8112')
+
+    vim.cmd("runtime plugin/cokeline.lua")
 end
 
 ColorMyPencils()

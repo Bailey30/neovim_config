@@ -29,6 +29,10 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.spelllang = 'en_us'
+vim.cmd(":setlocal spell spelllang=en_us")
+-- vim.opt.spelllang = 'en_us'
 --vim.opt.colorcolumn = "80"
 vim.lsp.set_log_level("debug")
+
+-- format on save
+vim.cmd("autocmd BufWritePre * lua vim.lsp.buf.format()")

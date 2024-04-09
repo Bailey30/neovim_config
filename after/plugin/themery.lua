@@ -15,7 +15,7 @@ require("themery").setup({
     themes = { {
         name = "Gruvbox dark",
         colorscheme = "gruvbox",
-            after = [[
+        after = [[
         ResetThemes()
         ]],
         --after = [[ function() vim.cmd.colorscheme("gruvbox") end ]],
@@ -26,7 +26,14 @@ require("themery").setup({
             after = [[
         ResetThemes()
         ]],
-            --before = [[ function () vim.cmd.colorscheme("rose-pine") end ]],
+            before = [[
+            -- require("rose-pine").setup({
+            --     variant = "main",
+            --     styles = {
+            --         italic = false
+            --     }
+            -- })
+            ]],
         },
         {
             name = "Gruvbox minor",

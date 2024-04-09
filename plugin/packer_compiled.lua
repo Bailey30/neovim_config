@@ -100,6 +100,16 @@ _G.packer_plugins = {
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  cmp_luasnip = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
+  ["conform.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\conform.nvim",
+    url = "https://github.com/stevearc/conform.nvim"
+  },
   ["diffview.nvim"] = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\diffview.nvim",
@@ -109,6 +119,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\everforest",
     url = "https://github.com/sainnhe/everforest"
+  },
+  ["flash.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\flash.nvim",
+    url = "https://github.com/folke/flash.nvim"
   },
   fzf = {
     loaded = true,
@@ -269,6 +284,16 @@ _G.packer_plugins = {
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-surround",
     url = "https://github.com/kylechui/nvim-surround"
   },
+  ["nvim-test"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-test",
+    url = "https://github.com/klen/nvim-test"
+  },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-treesitter",
@@ -342,6 +367,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\themery.nvim",
     url = "https://github.com/zaldih/themery.nvim"
   },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
+  },
   ["triptych.nvim"] = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\triptych.nvim",
@@ -408,30 +438,30 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
--- Config for: project.nvim
-time([[Config for project.nvim]], true)
-try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\17project_nvim\frequire\0", "config", "project.nvim")
-time([[Config for project.nvim]], false)
--- Config for: inc-rename.nvim
-time([[Config for inc-rename.nvim]], true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15inc_rename\frequire\0", "config", "inc-rename.nvim")
-time([[Config for inc-rename.nvim]], false)
--- Config for: nvim-surround
-time([[Config for nvim-surround]], true)
-try_loadstring("\27LJ\2\ny\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\2\0\0:-- Configuration here, or leave empty to use defaults\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
-time([[Config for nvim-surround]], false)
--- Config for: nvim-neoclip.lua
-time([[Config for nvim-neoclip.lua]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fneoclip\frequire\0", "config", "nvim-neoclip.lua")
-time([[Config for nvim-neoclip.lua]], false)
 -- Config for: mellifluous.nvim
 time([[Config for mellifluous.nvim]], true)
 try_loadstring("\27LJ\2\n\v\0\0\1\0\0\0\1K\0\1\0\0", "config", "mellifluous.nvim")
 time([[Config for mellifluous.nvim]], false)
+-- Config for: nvim-surround
+time([[Config for nvim-surround]], true)
+try_loadstring("\27LJ\2\ny\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\2\0\0:-- Configuration here, or leave empty to use defaults\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
+time([[Config for nvim-surround]], false)
+-- Config for: inc-rename.nvim
+time([[Config for inc-rename.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15inc_rename\frequire\0", "config", "inc-rename.nvim")
+time([[Config for inc-rename.nvim]], false)
+-- Config for: nvim-neoclip.lua
+time([[Config for nvim-neoclip.lua]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fneoclip\frequire\0", "config", "nvim-neoclip.lua")
+time([[Config for nvim-neoclip.lua]], false)
 -- Config for: Comment.nvim
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
 time([[Config for Comment.nvim]], false)
+-- Config for: project.nvim
+time([[Config for project.nvim]], true)
+try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\17project_nvim\frequire\0", "config", "project.nvim")
+time([[Config for project.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
