@@ -83,14 +83,15 @@ local function format(g)
 end
 
 local normal = get_hl("Normal")
+local constant = get_hl("Constant")
 local normal_fg = format(normal.fg)
 local normal_bg = format(normal.bg)
 local string = get_hl("String")
-local string_fg = format(string.fg)
+local string_fg = string.fg and format(string.fg) or format(constant.fg)
 local special = get_hl("Special")
 local special_fg = format(special.fg)
 local identifier = get_hl("Identifier")
-local identifier_fg = format(identifier.fg)
+-- local identifier_fg = format(identifier.fg)
 -- local termCursorNC = get_hl("PmenuThumb")
 -- local pmenuThumb_bg = format(termCursorNC.bg)
 local statusLineNC = get_hl("StatusLineNC")
@@ -155,38 +156,41 @@ local function getTheme()
     return custom_gruvbox
 end
 
-require('lualine').setup {
-    options = {
-        theme = getTheme(),
-        component_separators = "|",
-        section_separators = "",
-    },
-    sections = {
-        lualine_c = {
-            {
-                -- get_current_file_location
-                "filename",
-                path = 1
-            }
-        },
-        lualine_b = {
-            { 'diff',
-                -- colored = true,
-                -- color = "normal_bg",
-                diff_color = {
-                    -- Same color values as the general color option can be used here.
-                    -- added    = 'GreenFg',  -- Changes the diff's added color
-                    -- modified = 'OrangeFg', -- Changes the diff's modified color
-                    -- removed  = 'PinkFg',   -- Changes the diff's removed color you
-                },
-            }, {
-            "branch"
-        }, {
-            "diagnostics"
-        }
-        },
-    },
-}
+-- require('lualine').setup {
+--     options = {
+--         -- theme = getTheme(),
+--         component_separators = "|",
+--         section_separators = "",
+--     },
+--     sections = {
+--         lualine_c = {
+--             {
+--                 -- get_current_file_location
+--                 "filename",
+--                 path = 1
+--             }
+--         },
+--         lualine_b = {
+--             { 'diff',
+--                 -- colored = true,
+--                 -- color = "normal_bg",
+--                 diff_color = {
+--                     -- Same color values as the general color option can be used here.
+--                     -- added    = 'GreenFg',  -- Changes the diff's added color
+--                     -- modified = 'OrangeFg', -- Changes the diff's modified color
+--                     -- removed  = 'PinkFg',   -- Changes the diff's removed color you
+--                 },
+--             }, {
+--             "branch"
+--         }, {
+--             "diagnostics"
+--         }
+--         },
+--         lualine_x = { "" },
+--         lualine_y = { "ctime", "cdate", "filetype", "progress" }
+--     },
+-- }
+
 
 
 

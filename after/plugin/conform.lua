@@ -2,7 +2,6 @@ require("conform").setup({
     formatters_by_ft = {
 
         lua = { "stylua" },
-        javascript = { "prettier" },
         typescript = { { 'prettierd', "prettier" } },
         typescriptreact = { { 'prettierd', "prettier" } },
         javascript = { { 'prettierd', "prettier" } },
@@ -11,13 +10,12 @@ require("conform").setup({
         html = { { 'prettierd', "prettier" } },
         css = { { 'prettierd', "prettier" } },
         ["*"] = { "codespell" },
-        html = { "prettier" }
     },
     formatters = {
         prettier = {
             -- command = "./prettier.json"
             -- printWidth = 200
-            prepend_args = { "--single-quote" }
+            -- prepend_args = { "--single-quote" }
         }
     },
     format_on_save = {
@@ -28,9 +26,9 @@ require("conform").setup({
 
 })
 
-require("conform").formatters.prettier = {
-    prepend_args = { "--print-width 400" }
-}
+-- require("conform").formatters.prettier = {
+--     prepend_args = { "--print-width 400" }
+-- }
 
 vim.api.nvim_create_user_command("Format", function(args)
     local range = nil

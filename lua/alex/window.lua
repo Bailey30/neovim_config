@@ -162,7 +162,7 @@ vim.api.nvim_create_autocmd("CmdlineEnter", {
 
 vim.api.nvim_create_autocmd("CmdlineLeave", {
     callback = function()
-       -- greenLeft:hide()
+        -- greenLeft:hide()
         -- vim.api.nvim_buf_set_lines(popup.bufnr, 0, 1, true, { "COMMAND" })
     end
 })

@@ -13,23 +13,23 @@ if !has('gui_running')
 endif
 
 " GUI color definitions
-let s:gui00 = "322931"
-let s:gui01 = "433b42"
-let s:gui02 = "5c545b"
-let s:gui03 = "797379"
-let s:gui04 = "989498"
-let s:gui05 = "b9b5b8"
-let s:gui06 = "d5d3d5"
-let s:gui07 = "ffffff"
-let s:gui08 = "dd464c" "red"
-let s:gui09 = "fd8b19"
-let s:gui0A = "fdcc59"
-let s:gui0B = "8fc13e" "green"
-let s:gui0C = "149b93"
-let s:gui0D = "1290bf"
-let s:gui0E = "c85e7c"
-let s:gui0F = "b33508"
-let s:guiYellow = "dfaf00"
+let s:gui00 = "#322931"
+let s:gui01 = "#433b42"
+let s:gui02 = "#5c545b"
+let s:gui03 = "#797379"
+let s:gui04 = "#989498"
+let s:gui05 = "#b9b5b8"
+let s:gui06 = "#d5d3d5"
+let s:gui07 = "#ffffff"
+let s:gui08 = "#dd464c" "red"
+let s:gui09 = "#fd8b19"
+let s:gui0A = "#fdcc59"
+let s:gui0B = "#8fc13e" "green"
+let s:gui0C = "#149b93"
+let s:gui0D = "#1290bf"
+let s:gui0E = "#c85e7c"
+let s:gui0F = "#b33508"
+let s:guiYellow = "#dfaf00"
 " #dfaf00
 
 " Terminal color definitions
@@ -67,10 +67,10 @@ let g:colors_name = "base16-hopscotch"
 " Highlighting function
 fun <sid>hi(group, guifg, guibg, ctermfg, ctermbg, attr)
   if a:guifg != ""
-    exec "hi " . a:group . " guifg=#" . s:gui(a:guifg)
+    exec "hi " . a:group . " guifg=" . s:gui(a:guifg)
   endif
   if a:guibg != ""
-    exec "hi " . a:group . " guibg=#" . s:gui(a:guibg)
+    exec "hi " . a:group . " guibg=" . s:gui(a:guibg)
   endif
   if a:ctermfg != ""
     exec "hi " . a:group . " ctermfg=" . s:cterm(a:ctermfg)
@@ -315,3 +315,25 @@ delf <sid>cterm
 " Remove color variables
 unlet s:gui00 s:gui01 s:gui02 s:gui03  s:gui04  s:gui05  s:gui06  s:gui07  s:gui08  s:gui09 s:gui0A  s:gui0B  s:gui0C  s:gui0D  s:gui0E  s:gui0F
 unlet s:cterm00 s:cterm01 s:cterm02 s:cterm03 s:cterm04 s:cterm05 s:cterm06 s:cterm07 s:cterm08 s:cterm09 s:cterm0A s:cterm0B s:cterm0C s:cterm0D s:cterm0E s:cterm0F
+
+hi link @variable.parameter         @parameter
+hi link @variable.member            @field
+hi link @module                     @namespace
+hi link @number.float               @float
+hi link @string.special.symbol      @symbol
+hi link @string.regexp              @string.regex
+hi link @markup.strong              @text.strong
+hi link @markup.italic              @text.emphasis
+hi link @markup.underline           @text.underline   " note: some are changed to @string.special
+hi link @markup.strikethrough       @text.strike
+hi link @markup.heading             @text.title
+hi link @markup.quote               @text.quote
+hi link @markup.link.url            @text.uri
+hi link @markup.math                @text.math
+hi link @markup.environment         @text.environment
+hi link @markup.environment.name    @text.environment.name
+hi link @markup.link                @text.reference
+hi link @markup.raw                 @text.literal
+hi link @markup.raw.block           @text.literal.block
+hi link @markup.link.label          @string.special
+hi link @markup.list                @punctuation.special

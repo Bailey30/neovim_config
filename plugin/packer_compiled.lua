@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "C:\\Users\\Baile\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1703942320\\share\\lua\\5.1\\?.lua;C:\\Users\\Baile\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1703942320\\share\\lua\\5.1\\?\\init.lua;C:\\Users\\Baile\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1703942320\\lib\\luarocks\\rocks-5.1\\?.lua;C:\\Users\\Baile\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1703942320\\lib\\luarocks\\rocks-5.1\\?\\init.lua"
-local install_cpath_pattern = "C:\\Users\\Baile\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1703942320\\lib\\lua\\5.1\\?.so"
+local package_path_str = "C:\\Users\\Baile\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1710088188\\share\\lua\\5.1\\?.lua;C:\\Users\\Baile\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1710088188\\share\\lua\\5.1\\?\\init.lua;C:\\Users\\Baile\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1710088188\\lib\\luarocks\\rocks-5.1\\?.lua;C:\\Users\\Baile\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1710088188\\lib\\luarocks\\rocks-5.1\\?\\init.lua"
+local install_cpath_pattern = "C:\\Users\\Baile\\AppData\\Local\\Temp\\nvim\\packer_hererocks\\2.1.1710088188\\lib\\lua\\5.1\\?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -90,10 +90,25 @@ _G.packer_plugins = {
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["bamboo.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\bamboo.nvim",
+    url = "https://github.com/ribru17/bamboo.nvim"
+  },
   ["base16-black-metal-scheme"] = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\base16-black-metal-scheme",
     url = "https://github.com/metalelf0/base16-black-metal-scheme"
+  },
+  ["bg.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\bg.nvim",
+    url = "https://github.com/typicode/bg.nvim"
+  },
+  catppuccin = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\catppuccin",
+    url = "https://github.com/catppuccin/nvim"
   },
   ["cmp-nvim-lsp"] = {
     loaded = true,
@@ -124,6 +139,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\flash.nvim",
     url = "https://github.com/folke/flash.nvim"
+  },
+  ["fleet-theme-nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\fleet-theme-nvim",
+    url = "https://github.com/felipeagc/fleet-theme-nvim"
   },
   fzf = {
     loaded = true,
@@ -165,6 +185,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\harpoon",
     url = "https://github.com/theprimeagen/harpoon"
   },
+  ["ice-cave.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\ice-cave.nvim",
+    url = "https://github.com/mcauley-penney/ice-cave.nvim"
+  },
   ["inc-rename.nvim"] = {
     config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15inc_rename\frequire\0" },
     loaded = true,
@@ -186,10 +211,20 @@ _G.packer_plugins = {
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\leap.nvim",
     url = "https://github.com/ggandor/leap.nvim"
   },
+  ["live-server.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\live-server.nvim",
+    url = "https://github.com/barrett-ruth/live-server.nvim"
+  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lsp-zero.nvim",
     url = "https://github.com/VonHeikemen/lsp-zero.nvim"
+  },
+  ["lualine-time"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\lualine-time",
+    url = "https://github.com/archibate/lualine-time"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -237,10 +272,25 @@ _G.packer_plugins = {
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\neo-tree.nvim",
     url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
   },
+  ["no-clown-fiesta.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\no-clown-fiesta.nvim",
+    url = "https://github.com/aktersnurra/no-clown-fiesta.nvim"
+  },
+  ["noctis.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\noctis.nvim",
+    url = "https://github.com/kartikp10/noctis.nvim"
+  },
   ["nui.nvim"] = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nui.nvim",
     url = "https://github.com/MunifTanjim/nui.nvim"
+  },
+  nvim = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim",
+    url = "https://github.com/Biscuit-Colorscheme/nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -261,6 +311,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-highlight-colors",
     url = "https://github.com/brenoprata10/nvim-highlight-colors"
+  },
+  ["nvim-lint"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-lint",
+    url = "https://github.com/mfussenegger/nvim-lint"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -303,6 +358,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-ts-autotag",
     url = "https://github.com/windwp/nvim-ts-autotag"
+  },
+  ["nvim-tundra"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\nvim-tundra",
+    url = "https://github.com/sam4llis/nvim-tundra"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -387,15 +447,30 @@ _G.packer_plugins = {
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\undotree",
     url = "https://github.com/mbbill/undotree"
   },
+  ["vim-aylin"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-aylin",
+    url = "https://github.com/AhmedAbdulrahman/vim-aylin"
+  },
   ["vim-blade"] = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-blade",
     url = "https://github.com/jwalton512/vim-blade"
   },
+  ["vim-colors-plain"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-colors-plain",
+    url = "https://github.com/andreypopp/vim-colors-plain"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-illuminate"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-illuminate",
+    url = "https://github.com/RRethy/vim-illuminate"
   },
   ["vim-matchup"] = {
     loaded = true,
@@ -406,6 +481,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-prisma",
     url = "https://github.com/prisma/vim-prisma"
+  },
+  ["zenbones.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\Baile\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\zenbones.nvim",
+    url = "https://github.com/mcchrish/zenbones.nvim"
   }
 }
 
@@ -438,26 +518,26 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
--- Config for: mellifluous.nvim
-time([[Config for mellifluous.nvim]], true)
-try_loadstring("\27LJ\2\n\v\0\0\1\0\0\0\1K\0\1\0\0", "config", "mellifluous.nvim")
-time([[Config for mellifluous.nvim]], false)
 -- Config for: nvim-surround
 time([[Config for nvim-surround]], true)
 try_loadstring("\27LJ\2\ny\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\2\0\0:-- Configuration here, or leave empty to use defaults\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
 time([[Config for nvim-surround]], false)
--- Config for: inc-rename.nvim
-time([[Config for inc-rename.nvim]], true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15inc_rename\frequire\0", "config", "inc-rename.nvim")
-time([[Config for inc-rename.nvim]], false)
 -- Config for: nvim-neoclip.lua
 time([[Config for nvim-neoclip.lua]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fneoclip\frequire\0", "config", "nvim-neoclip.lua")
 time([[Config for nvim-neoclip.lua]], false)
+-- Config for: inc-rename.nvim
+time([[Config for inc-rename.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15inc_rename\frequire\0", "config", "inc-rename.nvim")
+time([[Config for inc-rename.nvim]], false)
 -- Config for: Comment.nvim
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
 time([[Config for Comment.nvim]], false)
+-- Config for: mellifluous.nvim
+time([[Config for mellifluous.nvim]], true)
+try_loadstring("\27LJ\2\n\v\0\0\1\0\0\0\1K\0\1\0\0", "config", "mellifluous.nvim")
+time([[Config for mellifluous.nvim]], false)
 -- Config for: project.nvim
 time([[Config for project.nvim]], true)
 try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\17project_nvim\frequire\0", "config", "project.nvim")

@@ -1,6 +1,6 @@
 require("flash").setup {
     search = {
-        mode = "fuzzy",
+        mode = "exact",
     },
     keys = {
         { "m", mode = { "n" }, function()
@@ -10,3 +10,4 @@ require("flash").setup {
         end
         }
     } }
+require("flash").toggle(true)

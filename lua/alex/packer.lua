@@ -5,6 +5,41 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+    -- THEMES
+    use { 'morhetz/gruvbox' }
+    use({
+        'rose-pine/neovim',
+        as = 'rose-pine',
+        --config = function()
+        --	vim.cmd("colorscheme  rose-pine")-	--end
+    })
+    use { 'luisiacc/gruvbox-baby' }
+    use("ricardoraposo/gruvbox-minor.nvim")
+    use { "sainnhe/everforest" }
+    use({
+        'ramojus/mellifluous.nvim',
+        -- version = "v0.*", -- uncomment for stable config (some features might be missed if/when v1 comes out)
+        config = function()
+            -- optional, see configuration section.
+        end,
+    })
+    use { "savq/melange-nvim" }
+    use { 'metalelf0/base16-black-metal-scheme' }
+
+    use { 'sam4llis/nvim-tundra' }
+    use { "aktersnurra/no-clown-fiesta.nvim" }
+    use { "mcchrish/zenbones.nvim" }
+    use { 'andreypopp/vim-colors-plain' }
+    use { 'ribru17/bamboo.nvim' }
+    use { "Biscuit-Colorscheme/nvim" }
+    use { 'felipeagc/fleet-theme-nvim' }
+    use { 'AhmedAbdulrahman/vim-aylin' }
+    use { 'kartikp10/noctis.nvim', requires = { 'rktjmp/lush.nvim' } }
+    use { "mcauley-penney/ice-cave.nvim" }
+    use { "catppuccin/nvim", as = "catppuccin" }
+
+
+
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.5',
         -- or                            , branch = '0.1.x',
@@ -14,13 +49,6 @@ return require('packer').startup(function(use)
         }
     }
 
-    use { 'morhetz/gruvbox' }
-    use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
-        --config = function()
-        --	vim.cmd("colorscheme  rose-pine")-	--end
-    })
     --use {"rebelot/kanagawa.nvim", vim.cmd("colorscheme kanagawa-dragon")}
 
     use({ 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } })
@@ -65,6 +93,7 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         --    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
+    use { 'archibate/lualine-time' }
     use {
         'simonmclean/triptych.nvim',
         dependencies = {
@@ -103,7 +132,6 @@ return require('packer').startup(function(use)
         requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
     }
     use { "windwp/nvim-ts-autotag" }
-    use { 'luisiacc/gruvbox-baby' }
     use { "windwp/nvim-autopairs" }
 
     use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }
@@ -121,7 +149,6 @@ return require('packer').startup(function(use)
             require('neoclip').setup()
         end,
     }
-    use("ricardoraposo/gruvbox-minor.nvim")
     use({
         "kylechui/nvim-surround",
         tag    = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -165,21 +192,11 @@ return require('packer').startup(function(use)
         },
     })
     use { "prisma/vim-prisma" }
-    use { "sainnhe/everforest" }
     use { "ggandor/leap.nvim" }
     use { "rktjmp/lush.nvim" }
     use { "~/AppData/local/nvim/lushtheme" }
     use({ "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } })
     use("petertriho/nvim-scrollbar")
-    use({
-        'ramojus/mellifluous.nvim',
-        -- version = "v0.*", -- uncomment for stable config (some features might be missed if/when v1 comes out)
-        config = function()
-            -- optional, see configuration section.
-        end,
-    })
-    use { "savq/melange-nvim" }
-    use { 'metalelf0/base16-black-metal-scheme' }
     use { 'matbme/JABS.nvim' }
     use { 'MunifTanjim/nui.nvim' }
     use { "brenoprata10/nvim-highlight-colors" }
@@ -196,4 +213,9 @@ return require('packer').startup(function(use)
     use { "saadparwaiz1/cmp_luasnip" }
     use { "stevearc/conform.nvim" }
     use { "klen/nvim-test" }
+    use({ "typicode/bg.nvim" })
+    use { "RRethy/vim-illuminate" }
+
+    use { 'mfussenegger/nvim-lint' }
+    use { "barrett-ruth/live-server.nvim" }
 end)

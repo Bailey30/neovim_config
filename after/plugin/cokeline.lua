@@ -19,13 +19,14 @@ local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
 local statusLineNC = vim.api.nvim_get_hl(0, { name = "CursorLineNr" })
 local lineNrAbove = vim.api.nvim_get_hl(0, { name = "LineNr" })
 local comment = vim.api.nvim_get_hl(0, { name = "Comment" })
-print("normal", normal.bg)
 -- local normal_bg = normal.bg and format(normal.bg) or format(lineNrAbove.bg)
 local normal_bg = normal.bg and format(normal.bg) or "#28282"
 local normal_fg = normal.fg and format(normal.fg)
 local comment_fg = comment.fg and format(comment.fg) or font
 local statusLine_bg = statusLineNC.bg and format(statusLineNC.bg) or nil
-require('cokeline').setup({
+
+local config = {
+
 
     default_hl = {
         fg = function(buffer)
@@ -98,4 +99,5 @@ require('cokeline').setup({
             text = ' ',
         },
     },
-})
+}
+-- require('cokeline').setup(config)

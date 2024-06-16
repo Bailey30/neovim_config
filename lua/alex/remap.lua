@@ -73,9 +73,10 @@ vim.keymap.set("n", "sh", "<C-w>h")
 vim.keymap.set("n", "sk", "<C-w>k")
 vim.keymap.set("n", "sj", "<C-w>j")
 vim.keymap.set("n", "sl", "<C-w>l")
+
 -- jump to start and end of line
-vim.keymap.set("n", "<A-l>", "$")
-vim.keymap.set("n", "<A-h>", "_")
+vim.keymap.set("n", "<S-l>", "$")
+vim.keymap.set("n", "<S-h>", "_")
 
 -- resize windows
 vim.keymap.set("n", "<A-0>", ":res +1<enter>")
@@ -86,3 +87,6 @@ vim.keymap.set("n", "<A-7>", ":vert res -2<enter>")
 
 vim.keymap.set("n", "<C-h>", "b")
 vim.keymap.set("n", "<C-l>", "w")
+
+
+vim.api.nvim_create_user_command("PS", "PackerSync", {})

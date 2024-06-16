@@ -1,3 +1,4 @@
+-- :Inpect = gets treesitter group
 function ColorMyPencils(color)
     vim.g.gruvbox_italic = false
     vim.g.gruvbox_contrast_dark = "soft"
@@ -38,6 +39,10 @@ function ColorMyPencils(color)
     vim.cmd('hi OrangeFg guifg=#FE8112')
 
     vim.cmd("runtime plugin/cokeline.lua")
+
+    vim.api.nvim_set_hl(0, "@variable", { link = "Identifier" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "NeoTreeTitleBar", { link = "CursorLine" })
 end
 
 ColorMyPencils()

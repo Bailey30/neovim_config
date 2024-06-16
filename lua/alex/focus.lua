@@ -16,7 +16,6 @@ function LightenNormal()
 
     -- print("OldNormal", format(normal.bg))
 
-    print(normal.bg)
     local col = format(normal.bg)
     local num = tonumber(col, 16)
     local r = bit.rshift(num, 16) + amt
