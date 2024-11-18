@@ -8,7 +8,7 @@ function ColorMyPencils(color)
     -- vim.cmd.colorscheme("lushtheme1")
     -- vim.cmd.colorscheme("everforest")
     -- vim.cmd('colorscheme mellifluous')
-    vim.cmd('colorscheme hopscotch')
+    vim.cmd('colorscheme onedark')
     --color = color or "rose-pine"
     --vim.cmd.colorscheme(color)
     --vim.g.gruvbox_baby_function_style = "NONE"

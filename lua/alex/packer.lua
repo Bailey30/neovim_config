@@ -25,7 +25,7 @@ return require('packer').startup(function(use)
     })
     use { "savq/melange-nvim" }
     use { 'metalelf0/base16-black-metal-scheme' }
-
+    use 'Yazeed1s/oh-lucy.nvim'
     use { 'sam4llis/nvim-tundra' }
     use { "aktersnurra/no-clown-fiesta.nvim" }
     use { "mcchrish/zenbones.nvim" }
@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
     use { 'kartikp10/noctis.nvim', requires = { 'rktjmp/lush.nvim' } }
     use { "mcauley-penney/ice-cave.nvim" }
     use { "catppuccin/nvim", as = "catppuccin" }
+    use 'navarasu/onedark.nvim'
 
 
 
@@ -52,7 +53,7 @@ return require('packer').startup(function(use)
     --use {"rebelot/kanagawa.nvim", vim.cmd("colorscheme kanagawa-dragon")}
 
     use({ 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } })
-    use({ 'nvim-treesitter/playground' })
+    -- use({ 'nvim-treesitter/playground' })
     use("theprimeagen/harpoon")
     use { 'zaldih/themery.nvim' }
     use { 'mbbill/undotree' }
@@ -218,4 +219,17 @@ return require('packer').startup(function(use)
 
     use { 'mfussenegger/nvim-lint' }
     use { "barrett-ruth/live-server.nvim" }
+    use { "danymat/neogen" }
+    use { "amitds1997/remote-nvim.nvim" }
+    use { "nosduco/remote-sshfs.nvim" }
+    use {
+        'chipsenkbeil/distant.nvim',
+        branch = 'v0.3',
+        config = function()
+            require('distant'):setup()
+        end
+    }
+
+    use { "ray-x/lsp_signature.nvim" }
+    -- use { "echasnovski/mini.completion" }
 end)

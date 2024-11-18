@@ -67,6 +67,9 @@ ls.add_snippets("all", {
     }),
     s({ trig = "brr", name = "border 1px solid red" }, {
         t("border: 1px solid red;")
+    }),
+    s({ trig = "jd", name = "JsDoc" }, {
+        t("/** * "), i(1), t(" **/")
     })
 })
 

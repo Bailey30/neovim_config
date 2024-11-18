@@ -120,6 +120,13 @@ require("themery").setup({
         ResetThemes()
         ]],
         },
+        {
+            name = "One dark",
+            colorscheme = "onedark",
+            after = [[
+        ResetThemes()
+        ]],
+        },
         -- {
         --     name = "Despacio",
         --     colorscheme = "despacio",

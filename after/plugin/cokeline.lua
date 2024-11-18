@@ -52,10 +52,11 @@ local config = {
             end
         },
         {
-            text = function(buffer) return buffer.index .. ': ' end,
+            text = function(buffer) return '' end,
+            -- buffer.index .
         },
         {
-            text = function(buffer) return ' ' end,
+            text = function(buffer) return '' end,
             fg = function(buffer) return buffer.devicon.color end,
         },
         {
@@ -100,4 +101,4 @@ local config = {
         },
     },
 }
--- require('cokeline').setup(config)
+require('cokeline').setup(config)

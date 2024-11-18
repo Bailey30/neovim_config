@@ -15,14 +15,14 @@ lsp_zero.on_attach(function(_, bufnr)
     vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
 end)
 
 -- to learn how to use mason.nvim with lsp-zero
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'rust_analyzer', "gopls", "psalm", "html", "cssls", "yamlls", "jsonls", "lua_ls", "java_language_server" },
+    ensure_installed = { 'ts_ls', 'rust_analyzer', "gopls", "psalm", "html", "cssls", "yamlls", "jsonls", "lua_ls", "java_language_server" },
     handlers = {
         lsp_zero.default_setup,
         lua_ls = function()
@@ -32,15 +32,15 @@ require('mason-lspconfig').setup({
     },
 })
 
-require("lspconfig").tsserver.setup(
-    {
-        settings = {
-            implicitProjectConfiguration = {
-                -- checkJs = true
-            }
-        }
-    }
-)
+-- require("lspconfig").tsserver.setup(
+--     {
+--         settings = {
+--             implicitProjectConfiguration = {
+--                 -- checkJs = true
+--             }
+--         }
+--     }
+-- )
 
 
 local cmp = require('cmp')
@@ -56,8 +56,8 @@ cmp.setup({
     },
     formatting = lsp_zero.cmp_format(),
     mapping = cmp.mapping.preset.insert({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<C-Space>'] = cmp.mapping.complete(),
     }),

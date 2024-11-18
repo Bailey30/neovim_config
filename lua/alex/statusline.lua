@@ -43,6 +43,9 @@ vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "FocusGained" }, {
 })
 
 function Status_Line()
+    if not pcall(require, "lsp_signature") then return end
+    local lsp_sig = require("lsp_signature").status_line(100)
+
     return " "
         .. "%<"
         .. vim.b.file_name
@@ -50,6 +53,8 @@ function Status_Line()
         .. " "
         .. "%h"
         .. "%m"
+        -- .. lsp_sig.label
+        -- .. lsp_sig.hint
         .. "%="
         .. "%y"
         .. " "

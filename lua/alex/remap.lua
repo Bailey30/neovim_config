@@ -75,8 +75,11 @@ vim.keymap.set("n", "sj", "<C-w>j")
 vim.keymap.set("n", "sl", "<C-w>l")
 
 -- jump to start and end of line
-vim.keymap.set("n", "<S-l>", "$")
-vim.keymap.set("n", "<S-h>", "_")
+vim.keymap.set("n", "<C-l>", "$")
+vim.keymap.set("n", "<C-h>", "_")
+-- jump words
+vim.keymap.set("n", "<S-h>", "b")
+vim.keymap.set("n", "<S-l>", "w")
 
 -- resize windows
 vim.keymap.set("n", "<A-0>", ":res +1<enter>")
@@ -85,8 +88,11 @@ vim.keymap.set("n", "<A-8>", ":vert res +2<enter>")
 vim.keymap.set("n", "<A-7>", ":vert res -2<enter>")
 
 
-vim.keymap.set("n", "<C-h>", "b")
-vim.keymap.set("n", "<C-l>", "w")
-
 
 vim.api.nvim_create_user_command("PS", "PackerSync", {})
+
+-- Insert mode mapping
+vim.api.nvim_set_keymap('n', ':f', ':find <CR>', { noremap = true, silent = true })
+
+-- Visual mode mapping
+vim.api.nvim_set_keymap('v', ':f', ':find ', { noremap = true, silent = true })

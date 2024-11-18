@@ -107,12 +107,13 @@ local statusLine_bg = normal_bg
 -- local search_bg = string.format("%06x", col.bg)
 
 local pink = '#D3869B'
+
 local orange = '#FE8112'
 local command_green = '#B8BB26'
 
 local function getTheme()
     local custom_gruvbox = require 'lualine.themes.gruvbox'
-    -- change the background of lualine_c section for normal mode
+    -- change the background of lualine_c section for normal moe
     -- insert
     custom_gruvbox.insert.a.fg = normal_bg
     custom_gruvbox.insert.a.bg = '#D3869B'
@@ -133,7 +134,7 @@ local function getTheme()
     custom_gruvbox.visual.c.fg = normal_bg
     custom_gruvbox.visual.c.bg = orange
 
-    -- command
+    -- comman
     custom_gruvbox.command.a.fg = normal_bg
     custom_gruvbox.command.a.bg = command_green
 
@@ -156,42 +157,45 @@ local function getTheme()
     return custom_gruvbox
 end
 
--- require('lualine').setup {
---     options = {
---         -- theme = getTheme(),
---         component_separators = "|",
---         section_separators = "",
---     },
---     sections = {
---         lualine_c = {
---             {
---                 -- get_current_file_location
---                 "filename",
---                 path = 1
---             }
---         },
---         lualine_b = {
---             { 'diff',
---                 -- colored = true,
---                 -- color = "normal_bg",
---                 diff_color = {
---                     -- Same color values as the general color option can be used here.
---                     -- added    = 'GreenFg',  -- Changes the diff's added color
---                     -- modified = 'OrangeFg', -- Changes the diff's modified color
---                     -- removed  = 'PinkFg',   -- Changes the diff's removed color you
---                 },
---             }, {
---             "branch"
---         }, {
---             "diagnostics"
---         }
---         },
---         lualine_x = { "" },
---         lualine_y = { "ctime", "cdate", "filetype", "progress" }
---     },
--- }
+local config = {
+    options = {
+        theme = getTheme(),
+        component_separators = "|",
+        section_separators = "",
+    },
+    sections = {
+        lualine_c = {
+            {
+                -- get_current_file_location
+                "filename",
+                path = 1
+            }
+        },
+        lualine_b = {
+            {
+                'diff',
+                -- colored = true,
+                -- color = "normal_bg",
+                diff_color = {
+                    -- Same color values as the general color option can be used here.
+                    added    = 'GreenFg',  -- Changes the diff's added color
+                    modified = 'OrangeFg', -- Changes the diff's modified color
+                    removed  = 'PinkFg',   -- Changes the diff's removed color you
+                },
+            }, {
+            "branch"
+        }, {
+            "diagnostics"
+        }
+        },
+        lualine_x = { "" },
+        lualine_y = { "ctime", "cdate", "filetype", "progress" }
+    },
+}
 
 
+
+-- require('lualine').setup(config)
 
 
 vim.cmd("command! Lualine runtime plugin/lualine.lua")
