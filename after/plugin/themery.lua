@@ -24,14 +24,22 @@ function ResetThemes()
 end
 
 require("themery").setup({
-    themes = { {
-        name = "Gruvbox dark",
-        colorscheme = "gruvbox",
-        after = [[
+    themes = {
+        {
+            name = "Github Dark Dimmed",
+            colorscheme = "github_dark_dimmed",
+            after = [[
+                ResetThemes()
+            ]]
+        },
+        {
+            name = "Gruvbox dark",
+            colorscheme = "gruvbox",
+            after = [[
         ResetThemes()
         ]],
-        --after = [[ function() vim.cmd.colorscheme("gruvbox") end ]],
-    },
+            --after = [[ function() vim.cmd.colorscheme("gruvbox") end ]],
+        },
         {
             name = "Rose pine",
             colorscheme = "rose-pine",

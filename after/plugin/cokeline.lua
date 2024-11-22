@@ -69,7 +69,7 @@ local config = {
         },
         {
             text = function(buffer)
-                return buffer.filename
+                return "- " .. buffer.filename
             end,
             fg = function(buffer)
                 if (buffer.diagnostics.errors > 0) then

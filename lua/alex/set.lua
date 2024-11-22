@@ -36,6 +36,8 @@ vim.lsp.set_log_level("debug")
 
 -- format on save
 vim.cmd("autocmd BufWritePre * lua vim.lsp.buf.format()")
+vim.cmd("autocmd BufWritePre * lua vim.cmd('Neoformat')")
+
 
 local a = vim.api
 
@@ -59,3 +61,5 @@ a.nvim_create_autocmd("UIEnter", {
         return true
     end,
 })
+
+vim.api.nvim_set_option("clipboard", "unnamed")

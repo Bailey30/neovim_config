@@ -2,9 +2,9 @@ require("conform").setup({
     formatters_by_ft = {
 
         lua = { "stylua" },
-        typescript = { { 'prettierd', "prettier" } },
-        typescriptreact = { { 'prettierd', "prettier" } },
-        javascript = { { 'prettierd', "prettier" } },
+        typescript = { { 'prettier', "prettier" } },
+        typescriptreact = { { 'prettier', "prettier" } },
+        javascript = { { 'prettier', "prettier" } },
         javascriptreact = { { 'prettierd', "prettier" } },
         json = { { 'prettierd', "prettier" } },
         html = { { 'prettierd', "prettier" } },
@@ -13,8 +13,8 @@ require("conform").setup({
     },
     formatters = {
         prettier = {
-            -- command = "./prettier.json"
-            -- printWidth = 200
+            command = "./prettier.json"
+            -- printiidth = 200
             -- prepend_args = { "--single-quote" }
         }
     },

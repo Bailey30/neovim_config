@@ -38,7 +38,7 @@ return require('packer').startup(function(use)
     use { "mcauley-penney/ice-cave.nvim" }
     use { "catppuccin/nvim", as = "catppuccin" }
     use 'navarasu/onedark.nvim'
-
+    use({ 'projekt0n/github-nvim-theme' })
 
 
     use {
@@ -232,4 +232,16 @@ return require('packer').startup(function(use)
 
     use { "ray-x/lsp_signature.nvim" }
     -- use { "echasnovski/mini.completion" }
+    use { "nvim-treesitter/nvim-treesitter-context" }
+    use { "cshuaimin/ssr.nvim" }
+    use { 'MunifTanjim/prettier.nvim' }
+    use { "sbdchd/neoformat" }
+    use({
+        'ray-x/navigator.lua',
+        requires = {
+            { 'ray-x/guihua.lua',     run = 'cd lua/fzy && make' },
+            { 'neovim/nvim-lspconfig' },
+        },
+    })
+    use { "hedyhli/outline.nvim" }
 end)
