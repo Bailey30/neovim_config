@@ -90,7 +90,7 @@ function Status_Line()
     if not pcall(require, "lsp_signature") then return end
     local lsp_sig = require("lsp_signature").status_line(100)
     -- Ensure vim.b.git_status is a string
-    local git_status = vim.b.git_status or ''
+    local git_status = " " .. vim.b.git_status or ''
 
     return " "
         .. "%<"
