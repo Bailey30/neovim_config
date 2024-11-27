@@ -69,7 +69,10 @@ local config = {
         },
         {
             text = function(buffer)
-                return "- " .. buffer.filename
+                if buffer.is_focused then
+                    return "[ " .. buffer.filename .. " ]"
+                end
+                return buffer.filename
             end,
             fg = function(buffer)
                 if (buffer.diagnostics.errors > 0) then

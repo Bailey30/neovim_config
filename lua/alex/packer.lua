@@ -40,15 +40,15 @@ return require('packer').startup(function(use)
     use 'navarasu/onedark.nvim'
     use({ 'projekt0n/github-nvim-theme' })
 
-
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.5',
         -- or                            , branch = '0.1.x',
-        requires = { { 'nvim-lua/plenary.nvim' } },
+        requires = { { 'nvim-lua/plenary.nvim', "nvim-telescope/telescope-live-grep-args.nvim" } },
         dependecies = {
             "nvim-telescope/telescope-file-browser.nvim"
         }
     }
+
 
     --use {"rebelot/kanagawa.nvim", vim.cmd("colorscheme kanagawa-dragon")}
 
@@ -256,4 +256,5 @@ return require('packer').startup(function(use)
         },
         config = true
     }
+    use { "mawkler/refjump.nvim" }
 end)

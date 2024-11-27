@@ -11,13 +11,13 @@ require("conform").setup({
         css = { { 'prettierd', "prettier" } },
         ["*"] = { "codespell" },
     },
-    formatters = {
-        prettier = {
-            command = "./prettier.json"
-            -- printiidth = 200
-            -- prepend_args = { "--single-quote" }
-        }
-    },
+    -- formatters = {
+    --     prettier = {
+    --         command = "./prettier.json"
+    --         -- printiidth = 200
+    --         -- prepend_args = { "--single-quote" }
+    --     }
+    -- },
     format_on_save = {
         -- I recommend these options. See :help conform.format for details.
         lsp_fallback = true,

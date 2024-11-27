@@ -35,7 +35,7 @@ vim.cmd(":setlocal spell spelllang=en_us")
 vim.lsp.set_log_level("debug")
 
 -- format on save
-vim.cmd("autocmd BufWritePre * lua vim.lsp.buf.format()")
+-- vim.cmd("autocmd BufWritePre * lua vim.lsp.buf.format()")
 vim.cmd("autocmd BufWritePre * lua vim.cmd('Neoformat')")
 
 

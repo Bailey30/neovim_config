@@ -35,7 +35,7 @@ local function progress()
     end
 end
 
-local function git_status()
+local function git_diff_stat()
     local git_dir = vim.fn.finddir('.git', '.;')
     if git_dir == '' then
         return '' -- Not a Git repository
@@ -46,43 +46,32 @@ local function git_status()
         return ''                          -- No file path (e.g., empty buffer)
     end
 
-    local status = ''
-
     -- Check if the file is tracked by Git
     local is_tracked = vim.fn.systemlist('git ls-files --error-unmatch ' ..
         vim.fn.shellescape(file_path) .. ' 2> /dev/null')
     if #is_tracked == 0 then
-        status = status .. '?'
-        return status -- File is untracked
+        return '?' -- File is untracked
     end
 
-    -- Check the status of the current file
-    local file_status = vim.fn.systemlist('git status --porcelain -- ' .. vim.fn.shellescape(file_path))
-    if #file_status > 0 then
-        local status_char = file_status[1]:sub(1, 2)
-        if status_char:match('%sM') or status_char:match('M%s') then
-            status = status .. '*'
-        end
+    -- Get the diff stat for the current file
+    local diff_stat = vim.fn.systemlist('git diff --numstat -- ' .. vim.fn.shellescape(file_path))
+    if #diff_stat == 0 then
+        return '' -- No changes
     end
 
-    -- Check for unpushed commits involving the current file
-    local upstream = vim.fn.system('git rev-parse --abbrev-ref --symbolic-full-name @{u} 2> /dev/null')
-    if upstream ~= '' then
-        -- Check if the current file is part of unpushed commits
-        local unpushed_commits = vim.fn.systemlist('git log --oneline @{u}..HEAD -- ' .. vim.fn.shellescape(file_path))
-        if #unpushed_commits > 0 then
-            status = status .. '↑'
-        end
+    local added, removed = diff_stat[1]:match('(%d+)%s+(%d+)')
+    if added and removed then
+        return ' +' .. added .. ' -' .. removed
     end
 
-    return status
+    return ''
 end
 
 vim.api.nvim_create_autocmd({ "FileType", "BufEnter", "FocusGained" }, {
     callback = function()
         vim.b.branch_name = branch_name()
         vim.b.file_name = file_name()
-        vim.b.git_status = git_status()
+        vim.b.git_diff_stat = git_diff_stat()
     end
 })
 
@@ -90,13 +79,13 @@ function Status_Line()
     if not pcall(require, "lsp_signature") then return end
     local lsp_sig = require("lsp_signature").status_line(100)
     -- Ensure vim.b.git_status is a string
-    local git_status = " " .. vim.b.git_status or ''
+    local git_status = vim.b.git_diff_stat or ''
 
     return " "
         .. "%<"
         .. vim.b.file_name
         .. vim.b.branch_name
-        .. vim.b.git_status
+        .. (vim.b.git_diff_stat or '')
         .. " "
         .. "%h"
         .. "%m"
