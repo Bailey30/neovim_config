@@ -39,6 +39,7 @@ return require('packer').startup(function(use)
     use { "catppuccin/nvim", as = "catppuccin" }
     use 'navarasu/onedark.nvim'
     use({ 'projekt0n/github-nvim-theme' })
+    user { "dgox16/oldworld.nvim "}
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.5',
@@ -136,7 +137,7 @@ return require('packer').startup(function(use)
     use { "windwp/nvim-autopairs" }
 
     use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }
-    use { 'junegunn/fzf.vim' }
+    -- use { 'junegunn/fzf.vim' }
     use { "kamykn/spelunker.vim" }
     use {
         "AckslD/nvim-neoclip.lua",
@@ -236,13 +237,6 @@ return require('packer').startup(function(use)
     use { "cshuaimin/ssr.nvim" }
     use { 'MunifTanjim/prettier.nvim' }
     use { "sbdchd/neoformat" }
-    use({
-        'ray-x/navigator.lua',
-        requires = {
-            { 'ray-x/guihua.lua',     run = 'cd lua/fzy && make' },
-            { 'neovim/nvim-lspconfig' },
-        },
-    })
     use { "hedyhli/outline.nvim" }
     use { "NeogitOrg/neogit",
         dependencies = {
@@ -253,8 +247,9 @@ return require('packer').startup(function(use)
             "nvim-telescope/telescope.nvim", -- optional
             "ibhagwan/fzf-lua",              -- optional
             "echasnovski/mini.pick",         -- optional
-        },
+        }, 
         config = true
     }
     use { "mawkler/refjump.nvim" }
+    -- use {"mg979/vim-visual-multi"}
 end)
