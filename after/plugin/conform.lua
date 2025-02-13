@@ -10,6 +10,7 @@ require("conform").setup({
         html = { { 'prettierd', "prettier" } },
         css = { { 'prettierd', "prettier" } },
         ["*"] = { "codespell" },
+        djangohtml = { "djlint "}
     },
     -- formatters = {
     --     prettier = {

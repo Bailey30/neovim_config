@@ -39,7 +39,8 @@ return require('packer').startup(function(use)
     use { "catppuccin/nvim", as = "catppuccin" }
     use 'navarasu/onedark.nvim'
     use({ 'projekt0n/github-nvim-theme' })
-    user { "dgox16/oldworld.nvim "}
+    use { "dgox16/oldworld.nvim" }
+    use { "metalelf0/jellybeans-nvim" }
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.5',
@@ -247,7 +248,7 @@ return require('packer').startup(function(use)
             "nvim-telescope/telescope.nvim", -- optional
             "ibhagwan/fzf-lua",              -- optional
             "echasnovski/mini.pick",         -- optional
-        }, 
+        },
         config = true
     }
     use { "mawkler/refjump.nvim" }

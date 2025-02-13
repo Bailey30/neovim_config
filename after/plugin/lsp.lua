@@ -31,24 +31,43 @@ require('mason-lspconfig').setup({
         end,
     },
 })
+-- this makes numbers in the number column display colors of diagnostic errors
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.INFO] = '',
+            [vim.diagnostic.severity.HINT] = '',
+        },
+        numhl = {
+            [vim.diagnostic.severity.WARN] = 'WarningMsg',
+            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+            [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
+            [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
 
-require("lspconfig").pyright.setup{
+        },
+    },
+})
+
+require('lspconfig').pyright.setup {
     settings = {
         python = {
-            -- pythonPath = "E:/coding/caching_proxy/venv/Scripts/python.exe"
+            analysis = {
+                typeCheckingMode = "off", -- Reduce strict type checking
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                django = true
+            }
         }
     }
 }
 
--- require("lspconfig").tsserver.setup(
---     {
---         settings = {
---             implicitProjectConfiguration = {
---                 -- checkJs = true
---             }
---         }
---     }
--- )
+require("lspconfig").djlsp.setup{}
+
+require("lspconfig").html.setup {
+  filetypes = { "html" }, -- Only attach to pure HTML files
+}
 
 
 local cmp = require('cmp')
@@ -70,3 +89,19 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping.complete(),
     }),
 })
+
+
+-- set correct filetype of htmldjango files
+vim.filetype.add({
+  pattern = {
+    ['.*%.html'] = function(path, bufnr)
+      -- Check for common Django template syntax in the file
+      local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1] or ""
+      if first_line:match("{%%") or first_line:match("{{") then
+        return "htmldjango"
+      end
+      return "html"
+    end
+  }
+})
+

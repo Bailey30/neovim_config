@@ -24,8 +24,10 @@ vim.opt.ignorecase = true
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes:1"
 vim.opt.isfname:append("@-@")
+--  affects the bar at the side that shows git warnings
+vim.opt.statuscolumn = "%l%s"
 
 vim.opt.updatetime = 50
 
