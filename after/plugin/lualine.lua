@@ -55,6 +55,11 @@
 --   end
 --   return color
 -- end
+--
+function get_filetype()
+    return vim.bo.filetype
+end
+
 local function get_current_file_location()
     -- Get the buffer number of the current buffer
     local current_buffer = vim.fn.bufnr('%')
@@ -84,21 +89,27 @@ end
 
 local normal = get_hl("Normal")
 local constant = get_hl("Constant")
+-- local statement = get_hl("Statement")
+-- local statement_fg = format(statement.fg)
 local normal_fg = format(normal.fg)
 local normal_bg = format(normal.bg)
+-- local func = get_hl("Function")
+-- local function_fg = format(func.fg)
+-- local comment = get_hl("Comment")
+-- local comment_fg = format(comment.fg)
 local string = get_hl("String")
-local string_fg = string.fg and format(string.fg) or format(constant.fg)
+-- local string_fg = string.fg and format(string.fg) or format(constant.fg)
 local special = get_hl("Special")
 local special_fg = format(special.fg)
 local identifier = get_hl("Identifier")
 -- local identifier_fg = format(identifier.fg)
--- local termCursorNC = get_hl("PmenuThumb")
+local termCursorNC = get_hl("PmenuThumb")
 -- local pmenuThumb_bg = format(termCursorNC.bg)
 local statusLineNC = get_hl("StatusLineNC")
 -- local statusLine_bg = statusLineNC.bg and format(statusLineNC.bg) or normal_bg
 local statusLine_bg = normal_bg
--- local cursorLine = get_hl("CursorLine")
--- local cursorLine_bg = format(cursorLine.fg)
+local cursorLine = get_hl("CursorLine")
+local cursorLine_bg = format(cursorLine.bg)
 -- print(cursorLine_bg)
 -- print(normal_fg)
 
@@ -116,40 +127,41 @@ local function getTheme()
     -- change the background of lualine_c section for normal moe
     -- insert
     custom_gruvbox.insert.a.fg = normal_bg
-    custom_gruvbox.insert.a.bg = '#D3869B'
+    custom_gruvbox.insert.a.bg = normal_fg
 
     custom_gruvbox.insert.b.fg = normal_fg
-    custom_gruvbox.insert.b.bg = statusLine_bg
+    custom_gruvbox.insert.b.bg = cursorLine_bg
 
-    custom_gruvbox.insert.c.fg = normal_bg
-    custom_gruvbox.insert.c.bg = '#D3869B'
+    custom_gruvbox.insert.c.fg = normal_fg
+    custom_gruvbox.insert.c.bg = normal_bg
 
     -- visual
     custom_gruvbox.visual.a.fg = normal_bg
-    custom_gruvbox.visual.a.bg = orange
+    custom_gruvbox.visual.a.bg = normal_fg
 
     custom_gruvbox.visual.b.fg = normal_fg
-    custom_gruvbox.visual.b.bg = statusLine_bg
+    custom_gruvbox.visual.b.bg = cursorLine_bg
 
-    custom_gruvbox.visual.c.fg = normal_bg
-    custom_gruvbox.visual.c.bg = orange
+    custom_gruvbox.visual.c.fg = normal_fg
+    custom_gruvbox.visual.c.bg = statusLine_bg
 
-    -- comman
+    -- command
     custom_gruvbox.command.a.fg = normal_bg
-    custom_gruvbox.command.a.bg = command_green
+    custom_gruvbox.command.a.bg = normal_fg
+
 
     custom_gruvbox.command.b.fg = normal_fg
-    custom_gruvbox.command.b.bg = statusLine_bg
+    custom_gruvbox.command.b.bg = cursorLine_bg
 
-    custom_gruvbox.command.c.fg = normal_bg
-    custom_gruvbox.command.c.bg = command_green
+    custom_gruvbox.command.c.fg = normal_fg
+    custom_gruvbox.command.c.bg = normal_bg
 
     -- normal
     custom_gruvbox.normal.a.fg = normal_bg
     custom_gruvbox.normal.a.bg = normal_fg
 
     custom_gruvbox.normal.b.fg = normal_fg
-    custom_gruvbox.normal.b.bg = statusLine_bg
+    custom_gruvbox.normal.b.bg = cursorLine_bg
 
     custom_gruvbox.normal.c.fg = normal_fg
     custom_gruvbox.normal.c.bg = normal_bg
@@ -157,45 +169,75 @@ local function getTheme()
     return custom_gruvbox
 end
 
+
 local config = {
     options = {
         theme = getTheme(),
         component_separators = "|",
         section_separators = "",
+        -- icons_enabled = false,
     },
     sections = {
-        lualine_c = {
-            {
-                -- get_current_file_location
-                "filename",
-                path = 1
-            }
-        },
         lualine_b = {
             {
                 'diff',
                 -- colored = true,
                 -- color = "normal_bg",
-                diff_color = {
-                    -- Same color values as the general color option can be used here.
-                    added    = 'GreenFg',  -- Changes the diff's added color
-                    modified = 'OrangeFg', -- Changes the diff's modified color
-                    removed  = 'PinkFg',   -- Changes the diff's removed color you
-                },
-            }, {
-            "branch"
-        }, {
-            "diagnostics"
-        }
+                -- diff_color = {
+                --     -- Same color values as the general color option can be used here.
+                --     added    = 'GreenFg',  -- Changes the diff's added color
+                --     modified = 'OrangeFg', -- Changes the diff's modified color
+                --     removed  = 'PinkFg',   -- Changes the diff's removed color you
+                -- },
+                -- color = { bg = cursorLine_bg }
+            },
         },
+        lualine_c = {
+            {
+                "branch",
+                icon = "",
+                padding = {
+                    left = 0,
+                    right = 0
+                },
+                fmt = function(str, ctx)
+                    if str == "" then
+                        return ""
+                    end
+                    return "" .. str
+                end,
+                separator = ""
+            },
+            {
+                -- get_current_file_location
+                "filename",
+                path = 1,
+                fmt = function(str, ctx)
+                    return ":" .. str
+                end,
+                padding = { left = 0, right = 1 },
+                -- color = { bg = cursorLine_bg }
+            }
+        },
+
         lualine_x = { "" },
-        lualine_y = { "ctime", "cdate", "filetype", "progress" }
+        lualine_y = {
+            {
+                get_filetype,
+            },
+
+            {
+                "progress",
+            }
+
+        }
     },
 }
 
 
 
--- require('lualine').setup(config)
+
+require('lualine').setup(config)
 
 
 vim.cmd("command! Lualine runtime plugin/lualine.lua")

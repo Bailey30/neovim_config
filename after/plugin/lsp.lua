@@ -63,10 +63,10 @@ require('lspconfig').pyright.setup {
     }
 }
 
-require("lspconfig").djlsp.setup{}
+require("lspconfig").djlsp.setup {}
 
 require("lspconfig").html.setup {
-  filetypes = { "html" }, -- Only attach to pure HTML files
+    filetypes = { "html" }, -- Only attach to pure HTML files
 }
 
 
@@ -93,15 +93,14 @@ cmp.setup({
 
 -- set correct filetype of htmldjango files
 vim.filetype.add({
-  pattern = {
-    ['.*%.html'] = function(path, bufnr)
-      -- Check for common Django template syntax in the file
-      local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1] or ""
-      if first_line:match("{%%") or first_line:match("{{") then
-        return "htmldjango"
-      end
-      return "html"
-    end
-  }
+    pattern = {
+        ['.*%.html'] = function(path, bufnr)
+            -- Check for common Django template syntax in the file
+            local first_line = vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1] or ""
+            if first_line:match("{%%") or first_line:match("{{") then
+                return "htmldjango"
+            end
+            return "html"
+        end
+    }
 })
-

@@ -32,15 +32,14 @@ return require('packer').startup(function(use)
     use { 'andreypopp/vim-colors-plain' }
     use { 'ribru17/bamboo.nvim' }
     use { "Biscuit-Colorscheme/nvim" }
-    use { 'felipeagc/fleet-theme-nvim' }
     use { 'AhmedAbdulrahman/vim-aylin' }
-    use { 'kartikp10/noctis.nvim', requires = { 'rktjmp/lush.nvim' } }
-    use { "mcauley-penney/ice-cave.nvim" }
     use { "catppuccin/nvim", as = "catppuccin" }
     use 'navarasu/onedark.nvim'
     use({ 'projekt0n/github-nvim-theme' })
     use { "dgox16/oldworld.nvim" }
     use { "metalelf0/jellybeans-nvim" }
+    use { "samharju/synthweave.nvim" }
+    use { "alexmozaidze/palenight.nvim" }
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.5',
@@ -61,20 +60,6 @@ return require('packer').startup(function(use)
     use { 'mbbill/undotree' }
     use { "tpope/vim-fugitive" }
 
-    --    use {
-    --        "williamboman/mason.nvim",
-    --        "williamboman/mason-lspconfig.nvim",
-    --        "neovim/nvim-lspconfig",
-    --    }
-
-    --    use {
-    --        'phpactor/phpactor',
-    --        config = function()
-    --            vim.cmd [[autocmd FileType php setlocal makeprg=phpactor]]
-    --        end,
-    --        run = 'composer install --no-dev -o'
-    --    }
-    --
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
@@ -98,13 +83,6 @@ return require('packer').startup(function(use)
     }
     use { 'archibate/lualine-time' }
     use {
-        'simonmclean/triptych.nvim',
-        dependencies = {
-            'nvim-lua/plenary.nvim', -- required
-            -- 'nvim-tree/nvim-web-devicons', -- optional
-        }
-    }
-    use {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
         requires = {
@@ -121,13 +99,7 @@ return require('packer').startup(function(use)
             require("inc_rename").setup()
         end,
     }
-    use {
-        "m4xshen/hardtime.nvim",
-        dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-        opts = {}
-    }
     use { "jwalton512/vim-blade" }
-    --        use{"preservim/nerdtree"}
     use { "nvim-tree/nvim-tree.lua" }
     use { "andymass/vim-matchup" }
     use {
@@ -138,7 +110,6 @@ return require('packer').startup(function(use)
     use { "windwp/nvim-autopairs" }
 
     use { 'junegunn/fzf', run = function() vim.fn['fzf#install']() end }
-    -- use { 'junegunn/fzf.vim' }
     use { "kamykn/spelunker.vim" }
     use {
         "AckslD/nvim-neoclip.lua",

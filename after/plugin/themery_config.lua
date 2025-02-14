@@ -1,7 +1,21 @@
 -- local lualine = require("lualine")
+local background = require("bg")
+
 
 -- vim.cmd("lua Lualine()")
 -- use :Inpect to get highlight group
+
+
+
+local function get_hl(name)
+    return vim.api.nvim_get_hl(0, { name = name })
+end
+
+local function format(g)
+    return "#" .. string.format("%06x", g)
+end
+
+local normal = get_hl("Normal")
 vim.keymap.set("n", "<leader>tt", ":Themery<Enter>")
 local windowsBlue = "#000080"
 local windowsGrey = "#BFBFBF"
@@ -12,6 +26,13 @@ function ResetThemes()
     vim.api.nvim_set_hl(0, "@variable", { link = "Identifier" })
     vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
     vim.api.nvim_set_hl(0, "NeoTreeTitleBar", { link = "CursorLine" })
+
+    local normal = get_hl("Normal")
+    local normal_bg = format(normal.bg)
+
+    -- changes the terminal background to remove the blank line around the edge.
+    -- defined in lua/bg.lua
+    background.change_background(normal_bg)
 
     -- remove all italics
     local hl_groups = vim.api.nvim_get_hl(0, {})
@@ -68,6 +89,21 @@ require("themery").setup({
         ResetThemes()
         ]],
         },
+        {
+            name = "Jellybeans",
+            colorscheme = "jellybeans",
+            after = [[
+            ResetThemes()
+            ]]
+        },
+        {
+            name = "Palenight",
+            colorscheme = "palenight",
+            after = [[
+            ResetThemes()
+            ]]
+        },
+
         {
             name = "Gruvbox minor",
             colorscheme = "gruvbox-minor",
@@ -149,12 +185,26 @@ require("themery").setup({
         --     ResetThemes()
         --     ]]
         -- },
+        -- {
+        --     name = "Bamboo",
+        --     colorscheme = "bamboo",
+        --     after = [[
+        -- ResetThemes()
+        -- ]]
+        -- },
         {
-            name = "Bamboo",
-            colorscheme = "bamboo",
+            name = "Synthweave",
+            colorscheme = "synthweave",
             after = [[
-        ResetThemes()
-        ]]
+            ResetThemes()
+            ]]
+        },
+        {
+            name = "Old World",
+            colorscheme = "oldworld",
+            after = [[
+            ResetThemes()
+            ]]
         },
         {
             name = "Zenbones",
