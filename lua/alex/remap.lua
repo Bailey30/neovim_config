@@ -5,17 +5,17 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-vim.keymap.set("n", "J", "mzJ`z")       --append line below
+vim.keymap.set("n", "J", "mzJ`z") --append line below
 vim.keymap.set("n", "<C-d>", "<C-d>zz") --these keep cursor in centre when using ctrl d and u to move up and down
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")       -- these keep searched term in center of page when moving to next and previous
+vim.keymap.set("n", "n", "nzzzv") -- these keep searched term in center of page when moving to next and previous
 vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("n", "<leader>vwm", function()
-    require("vim-with-me").StartVimWithMe()
+	require("vim-with-me").StartVimWithMe()
 end)
 vim.keymap.set("n", "<leader>svwm", function()
-    require("vim-with-me").StopVimWithMe()
+	require("vim-with-me").StopVimWithMe()
 end)
 
 --vim.keymap.set("n", "<leader>v", "<c-v>")
@@ -44,8 +44,8 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]) --replace the word you are on
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
+vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>")
+vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>")
 
 -- vim.keymap.set("n", "<leader><leader>", function()
 --     vim.cmd("so")
@@ -62,9 +62,9 @@ vim.keymap.set("n", "<leader><leader>", "/")
 --  vim.keymap.set("n", "sj", "<C-w>j")
 --    vim.keymap.set("n", "sl", "<C-w>l")
 --
-vim.keymap.set('n', '<A-,>', ':bprev<CR>')
-vim.keymap.set('n', '<A-.>', ':bnext<CR>')
-vim.keymap.set('n', '<A-q>', ':bd<CR>')
+vim.keymap.set("n", "<A-,>", ":bprev<CR>")
+vim.keymap.set("n", "<A-.>", ":bnext<CR>")
+vim.keymap.set("n", "<A-q>", ":bd<CR>")
 
 -- split and navigate panes
 vim.keymap.set("n", "ss", ":split<Return>", opts)
@@ -87,12 +87,31 @@ vim.keymap.set("n", "<A-9>", ":res -1<enter>")
 vim.keymap.set("n", "<A-8>", ":vert res +2<enter>")
 vim.keymap.set("n", "<A-7>", ":vert res -2<enter>")
 
-
-
+-- PackerSync shortcut
 vim.api.nvim_create_user_command("PS", "PackerSync", {})
 
 -- Insert mode mapping
-vim.api.nvim_set_keymap('n', ':f', ':find <CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", ":f", ":find <CR>", { noremap = true, silent = true })
 
 -- Visual mode mapping
-vim.api.nvim_set_keymap('v', ':f', ':find ', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", ":f", ":find ", { noremap = true, silent = true })
+
+-- Return to normal mode and save buffer
+vim.keymap.set({ "n", "v", "i" }, "<C-s>", "<esc>:w<enter>")
+
+-- Jump to the next instance of the word that was just replaced and do the same replacement
+vim.keymap.set("n", "<leader>rn", "/<C-r>+<CR>.")
+
+-- Close buffer
+vim.keymap.set("n", "<S-q>", ":bw<CR>")
+
+vim.keymap.set("n", ":q", function()
+	local choice = vim.fn.confirm("Are you sure you want to quit?", "&Yes\n&No", 2)
+	if choice ~= 1 then
+		-- Abort the command if user says No
+		-- 1) Print a message
+		vim.cmd('echo "Aborting quit..."')
+	elseif choice == 1 then
+		vim.cmd(":q")
+	end
+end)

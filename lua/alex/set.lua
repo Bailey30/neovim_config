@@ -24,12 +24,10 @@ vim.opt.ignorecase = true
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes:1"
+vim.opt.signcolumn = "number"
 vim.opt.isfname:append("@-@")
 --  affects the bar at the side that shows git warnings
 vim.opt.statuscolumn = "%l%s"
-
-vim.opt.updatetime = 50
 
 vim.cmd(":setlocal spell spelllang=en_us")
 -- vim.opt.spelllang = 'en_us'
@@ -38,30 +36,29 @@ vim.lsp.set_log_level("debug")
 
 -- format on save
 -- vim.cmd("autocmd BufWritePre * lua vim.lsp.buf.format()")
-vim.cmd("autocmd BufWritePre * lua vim.cmd('Neoformat')")
-
+-- vim.cmd("autocmd BufWritePre * lua vim.cmd('Neoformat')")
 
 local a = vim.api
 
 a.nvim_create_autocmd("UIEnter", {
-    group = a.nvim_create_augroup("set_terminal_bg", {}),
-    callback = function()
-        local bg = a.nvim_get_hl_by_name("Normal", true)["background"]
-        if not bg then
-            return
-        end
+	group = a.nvim_create_augroup("set_terminal_bg", {}),
+	callback = function()
+		local bg = a.nvim_get_hl_by_name("Normal", true)["background"]
+		if not bg then
+			return
+		end
 
-        local fmt = string.format
+		local fmt = string.format
 
-        if os.getenv("TMUX") then
-            bg = fmt('printf "\\ePtmux;\\e\\033]11;#%06x\\007\\e\\\\"', bg)
-        else
-            bg = fmt('printf "\\033]11;#%06x\\007"', bg)
-        end
+		if os.getenv("TMUX") then
+			bg = fmt('printf "\\ePtmux;\\e\\033]11;#%06x\\007\\e\\\\"', bg)
+		else
+			bg = fmt('printf "\\033]11;#%06x\\007"', bg)
+		end
 
-        os.execute(bg)
-        return true
-    end,
+		os.execute(bg)
+		return true
+	end,
 })
 
 vim.api.nvim_set_option("clipboard", "unnamed")

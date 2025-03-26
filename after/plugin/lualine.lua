@@ -1,90 +1,13 @@
--- function extract_color_from_hllist(scope, syntaxlist, default)
---
---   scope = type(scope) == 'string' and { scope } or scope
---   for _, highlight_name in ipairs(syntaxlist) do
---     if vim.fn.hlexists(highlight_name) ~= 0 then
---       local color = extract_highlight_colors(highlight_name)
---       for _, sc in ipairs(scope) do
---         if color.reverse then
---           if sc == 'bg' then
---             sc = 'fg'
---           else
---             sc = 'bg'
---           end
---         end
---         if color[sc] then
---           return color[sc]
---         end
---       end
---     end
---   end
---   return default
--- end
---
--- -- local col = extract_highlight_colors("String")
--- -- print("col", string.format('#%06x', col.foreground))
---
---
--- -- print("col", string.format("%06x", col.bg))
--- -- print("serchbg", search_bg)
---
---
--- function extract_highlight_colors(color_group, scope)
---   local color = require('lualine.highlight').get_lualine_hl(color_group)
---   -- print("color", color)
---   if not color then
---     if vim.fn.hlexists(color_group) == 0 then
---       return nil
---     end
---     color = vim.api.nvim_get_hl_by_name(color_group, true)
---     if color.background ~= nil then
---       color.bg = string.format('#%06x', color.background)
---       color.background = nil
---     end
---     if color.foreground ~= nil then
---       color.fg = string.format('#%06x', color.foreground)
---       color.foreground = nil
---     end
---     if color.special ~= nil then
---       color.sp = string.format('#%06x', color.special)
---       color.special = nil
---     end
---   end
---   if scope then
---     return color[scope]
---   end
---   return color
--- end
---
-function get_filetype()
-    return vim.bo.filetype
-end
-
-local function get_current_file_location()
-    -- Get the buffer number of the current buffer
-    local current_buffer = vim.fn.bufnr('%')
-
-    -- Get the file name associated with the current buffer
-    local file_name = vim.fn.bufname(current_buffer)
-
-    -- Get the full path of the file
-    local full_path = vim.fn.fnamemodify(file_name, ':p')
-
-    -- Get the project's root directory
-    local project_root = vim.fn.getcwd()
-
-    -- Make the path relative to the project root
-    local relative_path = vim.fn.fnamemodify(full_path, ':~:' .. project_root)
-
-    return relative_path
+local function get_filetype()
+	return vim.bo.filetype
 end
 
 local function get_hl(name)
-    return vim.api.nvim_get_hl(0, { name = name })
+	return vim.api.nvim_get_hl(0, { name = name })
 end
 
 local function format(g)
-    return "#" .. string.format("%06x", g)
+	return "#" .. string.format("%06x", g)
 end
 
 local normal = get_hl("Normal")
@@ -100,7 +23,7 @@ local normal_bg = format(normal.bg)
 local string = get_hl("String")
 -- local string_fg = string.fg and format(string.fg) or format(constant.fg)
 local special = get_hl("Special")
-local special_fg = format(special.fg)
+-- local special_fg = format(special.fg)
 local identifier = get_hl("Identifier")
 -- local identifier_fg = format(identifier.fg)
 local termCursorNC = get_hl("PmenuThumb")
@@ -113,174 +36,142 @@ local cursorLine_bg = format(cursorLine.bg)
 -- print(cursorLine_bg)
 -- print(normal_fg)
 
-
 -- local col = vim.api.nvim_get_hl(0,{name = "Search"})
 -- local search_bg = string.format("%06x", col.bg)
 
-local pink = '#D3869B'
+local pink = "#D3869B"
 
-local orange = '#FE8112'
-local command_green = '#B8BB26'
+local orange = "#FE8112"
+local command_green = "#B8BB26"
 
 local function getTheme()
-    local custom_gruvbox = require 'lualine.themes.gruvbox'
-    -- change the background of lualine_c section for normal moe
-    -- insert
-    custom_gruvbox.insert.a.fg = normal_bg
-    custom_gruvbox.insert.a.bg = normal_fg
+	local custom_gruvbox = require("lualine.themes.gruvbox")
+	-- change the background of lualine_c section for normal moe
+	-- insert
+	custom_gruvbox.insert.a.fg = normal_fg
+	custom_gruvbox.insert.a.bg = normal_bg
 
-    custom_gruvbox.insert.b.fg = normal_fg
-    custom_gruvbox.insert.b.bg = cursorLine_bg
+	custom_gruvbox.insert.b.fg = normal_fg
+	custom_gruvbox.insert.b.bg = normal_bg
 
-    custom_gruvbox.insert.c.fg = normal_fg
-    custom_gruvbox.insert.c.bg = normal_bg
+	custom_gruvbox.insert.c.fg = normal_fg
+	custom_gruvbox.insert.c.bg = normal_bg
 
-    -- visual
-    custom_gruvbox.visual.a.fg = normal_bg
-    custom_gruvbox.visual.a.bg = normal_fg
+	-- visual
+	custom_gruvbox.visual.a.fg = normal_fg
+	custom_gruvbox.visual.a.bg = normal_bg
 
-    custom_gruvbox.visual.b.fg = normal_fg
-    custom_gruvbox.visual.b.bg = cursorLine_bg
+	custom_gruvbox.visual.b.fg = normal_fg
+	custom_gruvbox.visual.b.bg = normal_bg
 
-    custom_gruvbox.visual.c.fg = normal_fg
-    custom_gruvbox.visual.c.bg = statusLine_bg
+	custom_gruvbox.visual.c.fg = normal_fg
+	custom_gruvbox.visual.c.bg = normal_bg
 
-    -- command
-    custom_gruvbox.command.a.fg = normal_bg
-    custom_gruvbox.command.a.bg = normal_fg
+	-- command
+	custom_gruvbox.command.a.fg = normal_fg
+	custom_gruvbox.command.a.bg = normal_bg
 
+	custom_gruvbox.command.b.fg = normal_fg
+	custom_gruvbox.command.b.bg = normal_bg
 
-    custom_gruvbox.command.b.fg = normal_fg
-    custom_gruvbox.command.b.bg = cursorLine_bg
+	custom_gruvbox.command.c.fg = normal_fg
+	custom_gruvbox.command.c.bg = normal_bg
 
-    custom_gruvbox.command.c.fg = normal_fg
-    custom_gruvbox.command.c.bg = normal_bg
+	-- normal
+	custom_gruvbox.normal.a.fg = normal_fg
+	custom_gruvbox.normal.a.bg = normal_bg
 
-    -- normal
-    custom_gruvbox.normal.a.fg = normal_bg
-    custom_gruvbox.normal.a.bg = normal_fg
+	custom_gruvbox.normal.b.fg = normal_fg
+	custom_gruvbox.normal.b.bg = normal_bg
 
-    custom_gruvbox.normal.b.fg = normal_fg
-    custom_gruvbox.normal.b.bg = cursorLine_bg
+	custom_gruvbox.normal.c.fg = normal_fg
+	custom_gruvbox.normal.c.bg = normal_bg
 
-    custom_gruvbox.normal.c.fg = normal_fg
-    custom_gruvbox.normal.c.bg = normal_bg
-
-    return custom_gruvbox
+	return custom_gruvbox
 end
 
+local function lsp()
+	local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+	if #clients > 0 then
+		local lsp_names = {}
+		for _, client in ipairs(clients) do
+			table.insert(lsp_names, client.name)
+		end
+		return ":" .. table.concat(lsp_names, "|")
+	else
+		return ""
+	end
+end
 
 local config = {
-    options = {
-        theme = getTheme(),
-        component_separators = "|",
-        section_separators = "",
-        -- icons_enabled = false,
-    },
-    sections = {
-        lualine_b = {
-            {
-                'diff',
-                -- colored = true,
-                -- color = "normal_bg",
-                -- diff_color = {
-                --     -- Same color values as the general color option can be used here.
-                --     added    = 'GreenFg',  -- Changes the diff's added color
-                --     modified = 'OrangeFg', -- Changes the diff's modified color
-                --     removed  = 'PinkFg',   -- Changes the diff's removed color you
-                -- },
-                -- color = { bg = cursorLine_bg }
-            },
-        },
-        lualine_c = {
-            {
-                "branch",
-                icon = "",
-                padding = {
-                    left = 0,
-                    right = 0
-                },
-                fmt = function(str, ctx)
-                    if str == "" then
-                        return ""
-                    end
-                    return "" .. str
-                end,
-                separator = ""
-            },
-            {
-                -- get_current_file_location
-                "filename",
-                path = 1,
-                fmt = function(str, ctx)
-                    return ":" .. str
-                end,
-                padding = { left = 0, right = 1 },
-                -- color = { bg = cursorLine_bg }
-            }
-        },
+	options = {
+		theme = getTheme(),
+		component_separators = "",
+		section_separators = "",
+		globalstatus = true,
+	},
+	sections = {
+		lualine_a = { "mode" },
+		lualine_b = {},
+		lualine_c = {
+			{
+				"diff",
+			},
+			{
+				"branch",
+				icon = "",
+				padding = {
+					left = 0,
+					right = 0,
+				},
+				fmt = function(str, ctx)
+					if str == "" then
+						return ""
+					end
+					return "" .. str .. ":"
+				end,
+				separator = "",
+			},
+			{
+				"filename",
+				path = 1,
+				fmt = function(str, ctx)
+					return str
+				end,
+				padding = { left = 0, right = 1 },
+			},
+		},
 
-        lualine_x = { "" },
-        lualine_y = {
-            {
-                get_filetype,
-            },
+		lualine_x = { "" },
+		lualine_y = {},
+		lualine_z = {
+			{
 
-            {
-                "progress",
-            }
+				"location",
+				fmt = function(str, ctx)
+					local line = vim.fn.line(".")
+					local col = vim.fn.col(".")
+					local total_lines = vim.fn.line("$")
+					return line .. ":" .. col .. "/" .. total_lines
+				end,
+			},
 
-        }
-    },
+			{
+				get_filetype,
+				fmt = function(str, ctx)
+					return str
+				end,
+				padding = { left = 1, right = 0 },
+			},
+			{
+
+				lsp,
+				padding = { left = 0, right = 1 },
+			},
+		},
+	},
 }
 
-
-
-
-require('lualine').setup(config)
-
+require("lualine").setup(config)
 
 vim.cmd("command! Lualine runtime plugin/lualine.lua")
-
-
--- code taken from the repo to construct the theme
--- local colors = {
---   normal  = extract_color_from_hllist('bg', { 'PmenuSel', 'PmenuThumb', 'TabLineSel' }, '#000000'),
---   insert  = extract_color_from_hllist('fg', { 'String', 'MoreMsg' }, '#000000'),
---   replace = extract_color_from_hllist('fg', { 'Number', 'Type' }, '#000000'),
---   visual  = extract_color_from_hllist('fg', { 'Special', 'Boolean', 'Constant' }, '#000000'),
---   command = extract_color_from_hllist('fg', { 'Identifier' }, '#000000'),
---   back1   = extract_color_from_hllist('bg', { 'Normal', 'StatusLineNC' }, '#000000'),
---   fore    = extract_color_from_hllist('fg', { 'Normal', 'StatusLine' }, '#000000'),
---   back2   = extract_color_from_hllist('bg', { 'StatusLine' }, '#000000'),
--- }
---
--- local theme = {
---   normal = {
---     a = { bg = colors.normal, fg = colors.back1, gui = 'bold' },
---     b = { bg = colors.back1, fg = colors.normal },
---     c = { bg = colors.back2, fg = colors.fore },
---   },
---   insert = {
---     a = { bg = colors.insert, fg = colors.back1, gui = 'bold' },
---     b = { bg = colors.back1, fg = colors.insert },
---     c = { bg = colors.back2, fg = colors.fore },
---   },
---   replace = {
---     a = { bg = colors.replace, fg = colors.back1, gui = 'bold' },
---     b = { bg = colors.back1, fg = colors.replace },
---     c = { bg = colors.back2, fg = colors.fore },
---   },
---   visual = {
---     a = { bg = colors.visual, fg = colors.back1, gui = 'bold' },
---     b = { bg = colors.back1, fg = colors.visual },
---     c = { bg = colors.back2, fg = colors.fore },
---   },
---   command = {
---     a = { bg = colors.command, fg = colors.back1, gui = 'bold' },
---     b = { bg = colors.back1, fg = colors.command },
---     c = { bg = colors.back2, fg = colors.fore },
---   },
--- }
---
--- return {Lualine = Lualine}
