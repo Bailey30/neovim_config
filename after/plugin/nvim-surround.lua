@@ -17,3 +17,6 @@
 --
 --cst<div> - changes html tag to div
 --dst - deletes tag
+require("nvim-surround").setup({
+	"-- Configuration here, or leave empty to use defaults",
+})

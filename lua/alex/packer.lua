@@ -52,13 +52,15 @@ return require("packer").startup(function(use)
 		},
 	})
 
-	--use {"rebelot/kanagawa.nvim", vim.cmd("colorscheme kanagawa-dragon")}
-
 	use({ "nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" } })
 	-- use({ 'nvim-treesitter/playground' })
-	use("theprimeagen/harpoon")
+
+	-- Manage themes
 	use({ "zaldih/themery.nvim" })
+
 	use({ "mbbill/undotree" })
+
+	-- Git tools
 	use({ "tpope/vim-fugitive" })
 
 	use({
@@ -79,11 +81,14 @@ return require("packer").startup(function(use)
 	})
 
 	use({ "echasnovski/mini.nvim" })
+
+	-- Status line
 	use({
 		"nvim-lualine/lualine.nvim",
 		--    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
 	})
-	use({ "archibate/lualine-time" })
+
+	-- File tree
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
@@ -95,19 +100,24 @@ return require("packer").startup(function(use)
 			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 	})
+
 	use({
 		"smjonas/inc-rename.nvim",
 		config = function()
 			require("inc_rename").setup()
 		end,
 	})
+
+	-- PHP template syntax highlighting
 	use({ "jwalton512/vim-blade" })
-	use({ "nvim-tree/nvim-tree.lua" })
-	use({ "andymass/vim-matchup" })
+
+	-- use({ "andymass/vim-matchup" })
+	--
 	use({
 		"nvim-telescope/telescope-file-browser.nvim",
 		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	})
+
 	use({ "windwp/nvim-ts-autotag" })
 	use({ "windwp/nvim-autopairs" })
 
@@ -117,7 +127,11 @@ return require("packer").startup(function(use)
 			vim.fn["fzf#install"]()
 		end,
 	})
+
+	-- Spelling (not sure it works)
 	use({ "kamykn/spelunker.vim" })
+
+	-- Clipboard manager. Doesnt seem to be working
 	use({
 		"AckslD/nvim-neoclip.lua",
 		requires = {
@@ -130,25 +144,19 @@ return require("packer").startup(function(use)
 			require("neoclip").setup()
 		end,
 	})
+
+	-- Surround words with symbols ("", '', [], {}, etc)
 	use({
 		"kylechui/nvim-surround",
 		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-		config = function()
-			require("nvim-surround").setup({
-				"-- Configuration here, or leave empty to use defaults",
-			})
-		end,
 	})
+
+	-- Navigate to other projects
 	use({
 		"ahmedkhalf/project.nvim",
-		config = function()
-			require("project_nvim").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
-		end,
 	})
+
+	-- Tabline
 	use({
 		"willothy/nvim-cokeline",
 		requires = {
@@ -157,14 +165,20 @@ return require("packer").startup(function(use)
 			"stevearc/resession.nvim",
 		},
 	})
+
+	-- Commands for comments
 	use({
 		"numToStr/Comment.nvim",
 		config = function()
 			require("Comment").setup()
 		end,
 	})
+
 	use({ "lewis6991/gitsigns.nvim" })
+
+	-- Git diff view
 	use({ "sindrets/diffview.nvim" })
+
 	use({
 		"kdheepak/lazygit.nvim",
 		-- optional for floating window border decoration
@@ -172,17 +186,32 @@ return require("packer").startup(function(use)
 			"nvim-lua/plenary.nvim",
 		},
 	})
+
+	-- Utils/formatting for prisma
 	use({ "prisma/vim-prisma" })
+
+	-- Movement actions, possibly not in use
 	use({ "ggandor/leap.nvim" })
+
 	use({ "rktjmp/lush.nvim" })
 	use({ "~/AppData/local/nvim/lushtheme" })
+
+	-- Diagnostics
 	use({ "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } })
+
 	use("petertriho/nvim-scrollbar")
+
 	use({ "MunifTanjim/nui.nvim" })
+
 	use({ "brenoprata10/nvim-highlight-colors" })
+
 	use({ "lukas-reineke/indent-blankline.nvim" })
+
+	-- Jump to search term with character
 	use({ "folke/flash.nvim" })
+
 	use({ "akinsho/toggleterm.nvim" })
+
 	use({
 		"L3MON4D3/LuaSnip",
 		-- follow latest release.
@@ -190,22 +219,37 @@ return require("packer").startup(function(use)
 		-- install jsregexp (optional!:).
 		run = "make install_jsregexp",
 	})
+
 	use({ "saadparwaiz1/cmp_luasnip" })
+
+	-- Formatter
 	use({ "stevearc/conform.nvim" })
+
 	use({ "klen/nvim-test" })
-	use({ "typicode/bg.nvim" })
+
 	use({ "RRethy/vim-illuminate" })
 
 	use({ "mfussenegger/nvim-lint" })
+
 	use({ "barrett-ruth/live-server.nvim" })
+
 	use({ "danymat/neogen" })
 
 	use({ "ray-x/lsp_signature.nvim" })
+
 	use({ "nvim-treesitter/nvim-treesitter-context" })
+
+	-- Search and replace. Need a better alternative
 	use({ "cshuaimin/ssr.nvim" })
+
 	use({ "MunifTanjim/prettier.nvim" })
+
+	-- Formatter. Conform might be working instead of this
 	use({ "sbdchd/neoformat" })
+
+	-- Symbols outline
 	use({ "hedyhli/outline.nvim" })
+
 	use({
 		"NeogitOrg/neogit",
 		dependencies = {
@@ -219,6 +263,8 @@ return require("packer").startup(function(use)
 		},
 		config = true,
 	})
+
+	-- Jump to the next reference
 	use({ "mawkler/refjump.nvim" })
 	-- use {"mg979/vim-visual-multi"}
 	--

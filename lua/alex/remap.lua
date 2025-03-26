@@ -105,13 +105,18 @@ vim.keymap.set("n", "<leader>rn", "/<C-r>+<CR>.")
 -- Close buffer
 vim.keymap.set("n", "<S-q>", ":bw<CR>")
 
+-- Show confirmation prompt before closing Neovim
 vim.keymap.set("n", ":q", function()
-	local choice = vim.fn.confirm("Are you sure you want to quit?", "&Yes\n&No", 2)
-	if choice ~= 1 then
-		-- Abort the command if user says No
-		-- 1) Print a message
-		vim.cmd('echo "Aborting quit..."')
-	elseif choice == 1 then
+	-- Print question. First param is a string and a highlight group. Could be list.
+	vim.api.nvim_echo({ { "Quit? [y/N]", "CurSearch" } }, false, {})
+
+	-- Block until the user presses a key:
+	local choice = vim.fn.getchar()
+
+	if choice ~= 121 then
+		vim.cmd('echo "Quit aborted."')
+	elseif choice == 121 then
+		print("Closing Neovim.")
 		vim.cmd(":q")
 	end
 end)
