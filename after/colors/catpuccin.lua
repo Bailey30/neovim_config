@@ -87,6 +87,8 @@ require("catppuccin").setup({
 	-- 		crust = "#191926",
 	-- 	},
 	-- },
+
+	color_overrides = {},
 	default_integrations = true,
 	integrations = {
 		cmp = true,

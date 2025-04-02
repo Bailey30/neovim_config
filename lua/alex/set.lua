@@ -1,8 +1,10 @@
 vim.opt.guicursor = ""
 --vim.opt.guifont = "FiraCode Nerd Font Mono"
 
-vim.opt.nu = true
+vim.opt.number = true
 vim.opt.relativenumber = true
+
+vim.opt.showmode = false
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -15,8 +17,8 @@ vim.opt.wrap = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = "C:/Users/Baile/AppData/Local/nvim-data/undo"
-vim.opt.undofile = true
 
+vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
@@ -25,9 +27,9 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "number"
-vim.opt.isfname:append("@-@")
+-- vim.opt.isfname:append("@-@")
 --  affects the bar at the side that shows git warnings
-vim.opt.statuscolumn = "%l%s"
+vim.opt.statuscolumn = " %l %s"
 
 vim.cmd(":setlocal spell spelllang=en_us")
 -- vim.opt.spelllang = 'en_us'

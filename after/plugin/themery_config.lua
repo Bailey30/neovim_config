@@ -15,6 +15,8 @@ end
 vim.keymap.set("n", "<leader>tt", ":Themery<Enter>")
 
 function AlterColours()
+	-- Overwrite some colours.
+	-- Known altered schemes: hopscotch
 	vim.api.nvim_set_hl(0, "@variable", { link = "Identifier" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
 end
@@ -116,13 +118,13 @@ require("themery").setup({
         ResetThemes()
         ]],
 		},
-		{
-			name = "Mellifluous",
-			colorscheme = "mellifluous",
-			after = [[
-        ResetThemes()
-        ]],
-		},
+		-- {
+		-- 	name = "Mellifluous",
+		-- 	colorscheme = "mellifluous",
+		-- 	after = [[
+		--       ResetThemes()
+		--       ]],
+		-- },
 		-- {
 		--     name = "Melange",
 		--     colorscheme = "melange",

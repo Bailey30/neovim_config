@@ -11,13 +11,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv") -- these keep searched term in center of page when moving to next and previous
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("n", "<leader>vwm", function()
-	require("vim-with-me").StartVimWithMe()
-end)
-vim.keymap.set("n", "<leader>svwm", function()
-	require("vim-with-me").StopVimWithMe()
-end)
-
 --vim.keymap.set("n", "<leader>v", "<c-v>")
 
 -- greatest remap ever
@@ -107,6 +100,14 @@ vim.keymap.set("n", "<S-q>", ":bw<CR>")
 
 -- Show confirmation prompt before closing Neovim
 vim.keymap.set("n", ":q", function()
+	-- Get the number of open windows (buffers).
+	-- If the number is greather 1, you were attemping to close a split pane, so don't show the confirmation message.
+	if vim.fn.winnr("$") > 1 then
+		local buf_name = vim.api.nvim_buf_get_name(0)
+		print("Closed split pane buffer: ", buf_name)
+		vim.cmd(":q")
+		return
+	end
 	-- Print question. First param is a string and a highlight group. Could be list.
 	vim.api.nvim_echo({ { "Quit? [y/N]", "CurSearch" } }, false, {})
 
@@ -114,9 +115,22 @@ vim.keymap.set("n", ":q", function()
 	local choice = vim.fn.getchar()
 
 	if choice ~= 121 then
-		vim.cmd('echo "Quit aborted."')
+		vim.cmd('echo "Quit cancelled."')
 	elseif choice == 121 then
 		print("Closing Neovim.")
 		vim.cmd(":q")
 	end
 end)
+
+-- Copy current file path to clipboard.
+vim.keymap.set("n", "<leader>cfp", function()
+	local file_path = vim.fn.expand("%:p")
+	vim.fn.setreg("*", file_path)
+	print("File path copied to clipboard: ", file_path)
+end)
+
+-- Enable cursor movement in insert mode using HJKL combined with ctrl.
+vim.keymap.set("i", "<C-h>", "<Left>")
+vim.keymap.set("i", "<C-l>", "<Right>")
+vim.keymap.set("i", "<C-k>", "<Up>")
+vim.keymap.set("i", "<C-j>", "<Down>")

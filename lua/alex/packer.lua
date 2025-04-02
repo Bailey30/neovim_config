@@ -199,6 +199,7 @@ return require("packer").startup(function(use)
 	-- Diagnostics
 	use({ "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } })
 
+	-- Scrollbar
 	use("petertriho/nvim-scrollbar")
 
 	use({ "MunifTanjim/nui.nvim" })
@@ -210,8 +211,10 @@ return require("packer").startup(function(use)
 	-- Jump to search term with character
 	use({ "folke/flash.nvim" })
 
+	-- Integrated termincal
 	use({ "akinsho/toggleterm.nvim" })
 
+	-- Snippets
 	use({
 		"L3MON4D3/LuaSnip",
 		-- follow latest release.
@@ -227,6 +230,7 @@ return require("packer").startup(function(use)
 
 	use({ "klen/nvim-test" })
 
+	-- Highlight instances of word under cursor
 	use({ "RRethy/vim-illuminate" })
 
 	use({ "mfussenegger/nvim-lint" })
@@ -266,6 +270,8 @@ return require("packer").startup(function(use)
 
 	-- Jump to the next reference
 	use({ "mawkler/refjump.nvim" })
+
 	-- use {"mg979/vim-visual-multi"}
-	--
+
+	use({ "bassamsdata/namu.nvim" })
 end)
