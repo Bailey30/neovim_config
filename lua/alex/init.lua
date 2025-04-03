@@ -5,6 +5,7 @@ require("alex.nui")
 require("alex.statusline")
 require("window_title")
 require("autocommands")
+require("yanker").setup({})
 
 if vim.g.vscode then
 	require("alex.vscode")
