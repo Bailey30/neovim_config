@@ -18,13 +18,39 @@ local Menu = {
 	yank_set = "tagged",
 	displayed_yanks = {},
 	formatted_lines = {},
+	unformatted_lines = {},
 	index = 1, -- 1 indexed for "mark-like" row indexing
 
 	-- Setup configuration
 	config = {
 		highlight_indent = {
-			tagged = 4,
+			tagged = 5,
 			all = 0,
+		},
+		win_opts = {
+			shared = { wrap = true, linebreak = true },
+			set_based = {
+				number = {
+					tagged = false,
+					all = true,
+				},
+				showbreak = {
+					tagged = "  ",
+					all = "",
+				},
+				breakindentopt = {
+					tagged = "shift:2",
+					all = "shift:0",
+				},
+				breakindent = {
+					tagged = true,
+					all = false,
+				},
+				statuscolumn = {
+					tagged = "",
+					a = " %l ",
+				},
+			},
 		},
 	},
 }
@@ -40,6 +66,7 @@ end
 function Menu:create_state()
 	-- Load the saved yanks from the file.
 	local saved_yanks = History.get()
+	self.unformatted_lines = saved_yanks
 	-- Create a key/value set of yanks with tags.
 	self.yank_dict = yank_utils.generate_yank_dict(saved_yanks, self.config.hints.dictionary)
 	-- Format the yanks with tags to appear on buffer.
@@ -57,9 +84,9 @@ function Menu:open()
 	self:setup_highlights()
 	self:hide_cursor()
 
-	-- Add contents to buffer.
-	vim.api.nvim_buf_set_lines(self.buf, 0, -1, false, self.formatted_lines)
-	self.displayed_yanks = self.formatted_lines
+	self:display_lines(self.formatted_lines)
+	self:set_line_formatting()
+	self:set_mode_formatting()
 
 	-- Move focus to new buffer.
 	vim.api.nvim_set_current_win(self.win)
@@ -72,6 +99,29 @@ function Menu:open()
 	self:set_keymaps()
 
 	self:highlight_line()
+end
+
+function Menu:display_lines(selected_yank_set)
+	vim.api.nvim_buf_set_lines(self.buf, 0, -1, false, selected_yank_set)
+	self.displayed_yanks = selected_yank_set
+end
+
+function Menu:set_line_formatting()
+	for opt, value in pairs(self.config.win_opts.shared) do
+		vim.api.nvim_set_option_value(opt, value, {
+			scope = "local",
+			win = self.win,
+		})
+	end
+end
+
+function Menu:set_mode_formatting()
+	for opt, value in pairs(self.config.win_opts.set_based) do
+		vim.api.nvim_set_option_value(opt, value[self.yank_set], {
+			scope = "local",
+			win = self.win,
+		})
+	end
 end
 
 local function keymap_array(group)
@@ -159,22 +209,17 @@ function Menu:swap_yank_set()
 	local selected_yank_set
 
 	if self.yank_set == "tagged" then
-		selected_yank_set = History.get()
+		selected_yank_set = self.unformatted_lines
 		self.yank_set = "all"
 	else
 		selected_yank_set = self.formatted_lines
 		self.yank_set = "tagged"
 	end
 
-	vim.api.nvim_buf_set_lines(self.buf, 0, -1, false, selected_yank_set)
+	self:display_lines(selected_yank_set)
+	self:set_mode_formatting()
 
-	self.displayed_yanks = selected_yank_set
-
-	vim.api.nvim_set_option_value("number", self.yank_set ~= "tagged", {
-		scope = "local",
-		win = self.win,
-	})
-
+	-- Move back to the top of the list.
 	self:set_index(1)
 end
 
@@ -185,7 +230,7 @@ function Menu:select_yank()
 	local yank = vim.api.nvim_buf_get_lines(self.buf, row, row + 1, true)[1]
 	return yank
 end
-
+-- NOT IN USE --
 -- Gets the yank from the buffer and returns the first character which is the tag.
 function Menu:get_yank_tag()
 	local row = nvim_utils.get_cursor_position()
@@ -274,6 +319,7 @@ end
 
 function Menu:restore_cursor()
 	if cursor_cache.guicursor == "" then
+		print("guicursor was ''")
 		vim.o.guicursor = "a:"
 		cursor_cache.guicursor = nil -- Prevent second block from executing
 		vim.cmd("redraw")
@@ -299,7 +345,7 @@ function Menu:highlight_line()
 	local row = self.index
 
 	-- Manually set this so the window scrolls.
-	vim.api.nvim_win_set_cursor(self.window, { self.index, 0 })
+	vim.api.nvim_win_set_cursor(self.win, { self.index, 0 })
 
 	local end_col = vim.fn.strlen(vim.fn.getline(row))
 
@@ -323,10 +369,10 @@ function Menu:highlight_line()
 	-- Apply highlights to the tags.
 	if self.yank_set == "tagged" then
 		for index = 0, #self.formatted_lines - 1 do
-			vim.api.nvim_buf_set_extmark(self.buf, namespace, index, 0, {
+			vim.api.nvim_buf_set_extmark(self.buf, namespace, index, 1, {
 				hl_group = "Boolean",
 				end_row = index,
-				end_col = 1,
+				end_col = 2,
 				strict = true,
 				hl_mode = "blend",
 			})

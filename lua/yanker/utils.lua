@@ -79,7 +79,7 @@ end
 function yank_utils.format_display_lines(display_lines, tags)
 	local formatted_lines = {}
 	for i = 1, #tags do
-		formatted_lines[i] = string.format("%s:  %s", tags:sub(i, i), display_lines[i])
+		formatted_lines[i] = string.format(" %s:  %s", tags:sub(i, i), display_lines[i])
 	end
 	return formatted_lines
 end
