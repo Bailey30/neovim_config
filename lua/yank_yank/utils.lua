@@ -45,7 +45,7 @@ function window_utils.create_floating_window(item_count, layout_config)
 	local width = 50
 	local height = 17
 	local buf = vim.api.nvim_create_buf(false, true)
-	-- vim.api.nvim_buf_set_name(buf, "Yanker")
+	-- vim.api.nvim_buf_set_name(buf, "yank_yank")
 	local ui = vim.api.nvim_list_uis()[1] -- Info about the nvim window that is running.
 
 	local win_opts = {
@@ -70,7 +70,9 @@ local yank_utils = {}
 function yank_utils.generate_yank_dict(yanks, tags)
 	local lines = {}
 	for i = 1, #tags do
-		lines[tags:sub(i, i)] = yanks[i]
+		if i < #yanks then
+			lines[tags:sub(i, i)] = yanks[i]
+		end
 	end
 	return lines
 end
@@ -78,8 +80,14 @@ end
 -- Creates an array of lines that include the search tag paired with the yanked line.
 function yank_utils.format_display_lines(display_lines, tags)
 	local formatted_lines = {}
+	if #display_lines == 0 then
+		return { "Yank something." }
+	end
+
 	for i = 1, #tags do
-		formatted_lines[i] = string.format(" %s:  %s", tags:sub(i, i), display_lines[i])
+		if i <= #display_lines then
+			formatted_lines[i] = string.format(" %s:  %s", tags:sub(i, i), display_lines[i])
+		end
 	end
 	return formatted_lines
 end

@@ -274,4 +274,5 @@ return require("packer").startup(function(use)
 	-- use {"mg979/vim-visual-multi"}
 
 	use({ "bassamsdata/namu.nvim" })
+	use({ "rcarriga/nvim-notify" })
 end)

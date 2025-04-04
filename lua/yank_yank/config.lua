@@ -11,7 +11,7 @@ local config = {
 		window = {
 			width = 50,
 			height = 17,
-			title = "Yanker",
+			title = "Yank Yank",
 			relative = "editor",
 			anchor = "SW",
 			style = "minimal",
@@ -20,13 +20,23 @@ local config = {
 		},
 	},
 	keymaps = {
-		put = { "p", "<CR>" },
+		append = { "p" },
+		insert = "P",
+		below = "<CR>",
 		close = { "<Esc>", "<C-c>", "q" },
 		down = "j",
 		up = "k",
 		yank = "y",
 		change_yank_set = "<C-r>",
 	},
+	cursor = {
+		highlights = {
+			preserve_position = "YankYankPreserveCursor",
+		},
+	},
 }
+function config.setup(options)
+	config = vim.tbl_deep_extend("force", config, options or {})
+end
 
 return config

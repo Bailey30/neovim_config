@@ -1,5 +1,6 @@
-local History = require("yanker.history")
-local utils = require("yanker.utils")
+local History = require("yank_yank.history")
+local Cursor = require("yank_yank.cursor")
+local utils = require("yank_yank.utils")
 local lua_utils = utils.lua_utils
 local window_utils = utils.window_utils
 local yank_utils = utils.yank_utils
@@ -8,6 +9,7 @@ local nvim_utils = utils.nvim_utils
 local namespace = vim.api.nvim_create_namespace("cursor_line_highlight")
 local unset = -1
 
+---@class Menu
 local Menu = {
 	-- Program state
 	starting_mode = "",
@@ -63,7 +65,7 @@ function Menu:new(config)
 	return o
 end
 
-function Menu:create_state()
+function Menu:set_state(state)
 	-- Load the saved yanks from the file.
 	local saved_yanks = History.get()
 	self.unformatted_lines = saved_yanks
@@ -71,18 +73,16 @@ function Menu:create_state()
 	self.yank_dict = yank_utils.generate_yank_dict(saved_yanks, self.config.hints.dictionary)
 	-- Format the yanks with tags to appear on buffer.
 	self.formatted_lines = yank_utils.format_display_lines(saved_yanks, self.config.hints.dictionary)
-	-- Neovim mode when starting Yanker.
+	-- Neovim mode when starting yank_yank.
 	self.starting_mode = vim.fn.mode()
 	-- Get the buffer you are working in.
-	self.working_buf = vim.api.nvim_get_current_buf()
+	self.working_buf = state.working_buf
 	-- Create a floating window and open it.
 	self.buf, self.win = window_utils.create_floating_window(#self.formatted_lines, self.config.layout.window)
 end
 
-function Menu:open()
-	self:create_state()
-	self:setup_highlights()
-	self:hide_cursor()
+function Menu:open(state)
+	self:set_state(state)
 
 	self:display_lines(self.formatted_lines)
 	self:set_line_formatting()
@@ -94,9 +94,6 @@ function Menu:open()
 
 	-- Switch to normal mode in the new buffer.
 	nvim_utils.change_mode("<C-c>")
-
-	-- Set keymaps that controls functions of the menu.
-	self:set_keymaps()
 
 	self:highlight_line()
 end
@@ -124,86 +121,6 @@ function Menu:set_mode_formatting()
 	end
 end
 
-local function keymap_array(group)
-	local keymaps = nil
-	if type(group) == "string" then
-		keymaps = { group }
-	else
-		keymaps = group
-	end
-	return keymaps
-end
-
-function Menu:set_keymaps()
-	-- Keymaps for the letter tags.
-	for tag, line in pairs(self.yank_dict) do
-		vim.keymap.set("n", tag, function()
-			if self.yank_set == "tagged" then
-				self:put_yank(line)
-			end
-		end, { nowait = true, buffer = self.buf })
-	end
-
-	local keymaps = self.config.keymaps
-	local up, down, put, close, yank, change_yank_set =
-		keymaps.up, keymaps.down, keymaps.put, keymaps.close, keymaps.yank, keymaps.change_yank_set
-
-	-- "Up" keymaps
-	for _, keymap in ipairs(keymap_array(up)) do
-		vim.keymap.set("n", keymap, function()
-			self:up()
-		end, { nowait = true, buffer = self.buf })
-	end
-
-	-- "Down" keymaps
-	for _, keymap in ipairs(keymap_array(down)) do
-		vim.keymap.set("n", keymap, function()
-			self:down()
-		end, { nowait = true, buffer = self.buf })
-	end
-
-	-- "Put" keymaps
-	for _, keymap in ipairs(keymap_array(put)) do
-		vim.keymap.set("n", keymap, function()
-			self:put_yank(self.displayed_yanks[self.index])
-		end, { nowait = true, buffer = self.buf })
-	end
-
-	-- "Yank" keymaps
-	for _, keymap in ipairs(keymap_array(yank)) do
-		vim.keymap.set("n", keymap, function()
-			self:yank(self.displayed_yanks[self.index])
-		end, { nowait = true, buffer = self.buf })
-	end
-
-	-- "Close" keymaps
-	for _, keymap in ipairs(keymap_array(close)) do
-		vim.keymap.set("n", keymap, function()
-			self:close()
-		end, { nowait = true, buffer = self.buf })
-	end
-
-	-- "Change yank set" keymaps
-	for _, keymap in ipairs(keymap_array(change_yank_set)) do
-		vim.keymap.set("n", keymap, function()
-			self:swap_yank_set()
-		end, { nowait = true, buffer = self.buf })
-	end
-end
-
--- NOT IN USE --
--- Handles getting the yank from the displayed list depending on the current mode.
--- When pressing <CR> but not with tags.
-function Menu:get_yank_from_set()
-	local selected_yank
-	if self.yank_set == "tagged" then
-		selected_yank = self.yank_dict[self:get_yank_tag()]
-	else
-		selected_yank = self.displayed_yanks[self.index]
-	end
-	return selected_yank
-end
-
 -- Changes the displayed yanks to either the most recent yanks with tags or all yanks history.
 function Menu:swap_yank_set()
 	local selected_yank_set
@@ -221,45 +138,6 @@ function Menu:swap_yank_set()
 
 	-- Move back to the top of the list.
 	self:set_index(1)
-end
-
--- NOT IN USE--
--- Gets the yank from the list as it appears.
-function Menu:select_yank()
-	local row = nvim_utils.get_cursor_position()
-	local yank = vim.api.nvim_buf_get_lines(self.buf, row, row + 1, true)[1]
-	return yank
-end
--- NOT IN USE --
--- Gets the yank from the buffer and returns the first character which is the tag.
-function Menu:get_yank_tag()
-	local row = nvim_utils.get_cursor_position()
-	local yank = vim.api.nvim_buf_get_lines(self.buf, self.index - 1, self.index, true)[1]
-	return yank:sub(1, 1)
-end
-
--- Inserts yank into the location of the cursor when the Yanker window was opened.
-function Menu:put_yank(yank_to_put)
-	local working_buf = self.working_buf
-	self:close()
-
-	local working_row, working_col = nvim_utils.get_cursor_position()
-	local working_line = vim.api.nvim_get_current_line()
-
-	-- If yank is multi-line, insert below. Otherwise insert into line.
-	if string.find(yank_to_put, "↵") then
-		vim.api.nvim_buf_set_lines(
-			working_buf,
-			working_row + 1,
-			working_row + 1,
-			false,
-			lua_utils.split(yank_to_put, "↵")
-		)
-	else
-		vim.api.nvim_set_current_line(
-			working_line:sub(0, working_col + 1) .. yank_to_put .. working_line:sub(working_col + 2)
-		)
-	end
 end
 
 -- Put the selected yank into the clipboard and close the window.
@@ -282,7 +160,7 @@ function Menu:close()
 	self.win = unset
 	self.yank_set = "tagged"
 
-	self:restore_cursor()
+	Cursor:restore()
 end
 
 function Menu:set_index(i)
@@ -302,39 +180,6 @@ function Menu:down()
 		self.index = self.index + 1
 	end
 	self:highlight_line()
-end
-
-local cursor_cache = {
-	guicursor = nil,
-}
-
-function Menu:hide_cursor()
-	-- Save current cursor setting
-	if vim.o.guicursor then
-		cursor_cache.guicursor = vim.o.guicursor
-	end
-	-- Set cursor invisible
-	vim.o.guicursor = "a:CursorHidden"
-end
-
-function Menu:restore_cursor()
-	if cursor_cache.guicursor == "" then
-		print("guicursor was ''")
-		vim.o.guicursor = "a:"
-		cursor_cache.guicursor = nil -- Prevent second block from executing
-		vim.cmd("redraw")
-		return
-	end
-
-	-- Restore original cursor setting
-	if cursor_cache.guicursor then
-		vim.o.guicursor = cursor_cache.guicursor
-		cursor_cache.guicursor = nil
-	end
-end
-
-function Menu:setup_highlights()
-	vim.api.nvim_set_hl(0, "CursorHidden", { blend = 100, nocombine = true, underline = false })
 end
 
 -- Apply highlights.
@@ -381,7 +226,7 @@ function Menu:highlight_line()
 
 	-- Update the counter at the bottom of the window.
 	vim.api.nvim_win_set_config(self.win, {
-		footer = row + 1 .. " / " .. #self.displayed_yanks,
+		footer = row .. " / " .. #self.displayed_yanks,
 	})
 end
 

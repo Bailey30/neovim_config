@@ -1,5 +1,5 @@
-local History = require("yanker.history")
-local nvim_utils = require("yanker.utils").nvim_utils
+local History = require("yank_yank.history")
+local nvim_utils = require("yank_yank.utils").nvim_utils
 local System_clipboard = {}
 
 function System_clipboard.setup()
@@ -7,7 +7,7 @@ function System_clipboard.setup()
 
 	vim.api.nvim_create_autocmd("FocusGained", {
 		callback = function()
-			History.push()
+			History:push()
 		end,
 	})
 end

@@ -1,6 +1,8 @@
 vim.opt.guicursor = ""
 --vim.opt.guifont = "FiraCode Nerd Font Mono"
 
+vim.notify = require("notify")
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
