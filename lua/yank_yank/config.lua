@@ -21,8 +21,8 @@ local config = {
 	},
 	keymaps = {
 		append = { "p" },
-		insert = "P",
-		below = "<CR>",
+		insert = { "P", "<CR>" },
+		below = {},
 		close = { "<Esc>", "<C-c>", "q" },
 		down = "j",
 		up = "k",
