@@ -11,10 +11,7 @@ return require("packer").startup(function(use)
 	use({
 		"rose-pine/neovim",
 		as = "rose-pine",
-		--config = function()
-		--	vim.cmd("colorscheme  rose-pine")-	--end
 	})
-	-- use { 'luisiacc/gruvbox-baby' }
 	use("ricardoraposo/gruvbox-minor.nvim")
 	use({ "sainnhe/everforest" })
 	use({
@@ -41,6 +38,16 @@ return require("packer").startup(function(use)
 	use({ "metalelf0/jellybeans-nvim" })
 	use({ "samharju/synthweave.nvim" })
 	use({ "alexmozaidze/palenight.nvim" })
+	use({ "nyoom-engineering/oxocarbon.nvim" })
+	use("EdenEast/nightfox.nvim") -- Packer
+	use({ "vague2k/vague.nvim" })
+	use({ "metalelf0/black-metal-theme-neovim" })
+	use({
+		"Koalhack/darcubox-nvim",
+		config = function()
+			vim.cmd("colorscheme darcubox")
+		end,
+	})
 
 	use({
 		"nvim-telescope/telescope.nvim",
@@ -60,6 +67,15 @@ return require("packer").startup(function(use)
 
 	use({ "mbbill/undotree" })
 
+	-- Debugging
+	use("mfussenegger/nvim-dap")
+	use("rcarriga/nvim-dap-ui")
+	use("theHamsta/nvim-dap-virtual-text")
+	use("nvim-telescope/telescope-dap.nvim")
+	use({ "nvim-neotest/nvim-nio" })
+	use("mfussenegger/nvim-dap-python")
+	use({ "jay-babu/mason-nvim-dap.nvim" })
+
 	-- Git tools
 	use({ "tpope/vim-fugitive" })
 
@@ -68,8 +84,8 @@ return require("packer").startup(function(use)
 		branch = "v3.x",
 		requires = {
 			--- Uncomment the two plugins below if you want to manage the language servers from neovim
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
+			{ "mason-org/mason.nvim" },
+			{ "mason-org/mason-lspconfig.nvim" },
 
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" },
@@ -224,7 +240,7 @@ return require("packer").startup(function(use)
 	})
 
 	use({ "saadparwaiz1/cmp_luasnip" })
-
+	use({ "saghen/blink.cmp", tag = "1.*" })
 	-- Formatter
 	use({ "stevearc/conform.nvim" })
 
@@ -275,4 +291,6 @@ return require("packer").startup(function(use)
 
 	use({ "bassamsdata/namu.nvim" })
 	use({ "rcarriga/nvim-notify" })
+
+	use({ "rafamadriz/friendly-snippets" })
 end)

@@ -19,6 +19,8 @@ function AlterColours()
 	-- Known altered schemes: hopscotch
 	vim.api.nvim_set_hl(0, "@variable", { link = "Identifier" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+	-- CursorLine highlight in blink-cmp completion popup
+	vim.api.nvim_set_hl(0, "BlinkCmpDocCursorLine", { link = "CursorLine" })
 end
 
 function ResetThemes()
@@ -41,6 +43,12 @@ function ResetThemes()
 			vim.api.nvim_set_hl(0, key, vim.tbl_extend("force", hl_group, { italic = false }))
 		end
 	end
+
+	local cursor_colour = vim.api.nvim_get_hl(0, { name = "Search" })
+	-- local cursor_colour = get_hl("Normal")
+	-- local cursor_colour_bg = format(cursor_colour.bg)
+
+	vim.api.nvim_set_hl(0, "mode_cursor", { nocombine = true, blend = 50, bg = cursor_colour.bg })
 end
 
 require("themery").setup({
@@ -66,6 +74,13 @@ require("themery").setup({
 			after = [[
             ResetThemes()
             ]],
+		},
+		{
+			name = "Darcubox",
+			colorscheme = "darcubox",
+			after = [[
+			         ResetThemes()
+			         ]],
 		},
 		{
 			name = "Rose pine",
@@ -103,13 +118,13 @@ require("themery").setup({
             AlterColours()
             ]],
 		},
-		{
-			name = "Palenight",
-			colorscheme = "palenight",
-			after = [[
-            ResetThemes()
-            ]],
-		},
+		-- {
+		-- 	name = "Palenight",
+		-- 	colorscheme = "palenight",
+		-- 	after = [[
+		--           ResetThemes()
+		--           ]],
+		-- },
 
 		{
 			name = "Gruvbox minor",
@@ -149,21 +164,13 @@ require("themery").setup({
 		--     after = [[vim.api.nvim_command("runtime plugin/lualine.lua")]],
 		--     before = [[  vim.g.everforest_disable_italic_comment = "1" ]]
 		-- },
-		{
-			name = "Alduin",
-			colorscheme = "alduin",
-			after = [[
-        ResetThemes()
-        ]],
-			before = [[
+		-- {
+		-- 	name = "Alduin",
+		-- 	colorscheme = "alduin",
+		-- 	after = [[
+		--       ResetThemes()
+		--       ]],
 
-    -- require('cokeline').setup({
-    --     default_hl = {
-    --     }
-
-    -- require("lualine").setup({})
-    ]],
-		},
 		{
 			name = "Hopscotch",
 			colorscheme = "hopscotch",
@@ -178,6 +185,11 @@ require("themery").setup({
 			after = [[
         ResetThemes()
         ]],
+		},
+		{
+			name = "Vague",
+			colorscheme = "vague",
+			after = [[ResetThemes()]],
 		},
 		-- {
 		--     name = "Despacio",
@@ -251,21 +263,45 @@ require("themery").setup({
 		-- ]]
 		-- },
 		{
-			name = "Biscuit",
-			colorscheme = "biscuit",
-			before = [[
-            ]],
+			name = "Emperor",
+			colorscheme = "emperor-alt",
 			after = [[
-        ResetThemes()
-        ]],
+            ResetThemes()
+            	
+            vim.api.nvim_set_hl(0, "@variable", { link = "@variable.parameter" })
+            ]],
 		},
 		{
-			name = "Aylin",
-			colorscheme = "aylin",
-			after = [[
-        ResetThemes()
-        ]],
+			name = "Thyrging",
+			colorscheme = "thyrfing-alt",
+			after = [[ResetThemes()]],
 		},
+		{
+			name = "Windir",
+			colorscheme = "windir-alt",
+			after = [[ResetThemes()]],
+		},
+		{
+			name = "Impaled Nazarene",
+			colorscheme = "impaled-nazarene-alt",
+			after = [[ResetThemes()]],
+		},
+		-- {
+		--     name = "Biscuit",
+		--     colorscheme = "biscuit",
+		--     before = [[
+		--     ]],
+		--     after = [[
+		--     ResetThemes()
+		--     ]],
+		-- },
+		-- {
+		--     name = "Aylin",
+		--     colorscheme = "aylin",
+		--     after = [[
+		--     ResetThemes()
+		--     ]],
+		-- },
 		-- {
 		--     name = "Windows",
 		--     colorscheme = "lushtheme1",

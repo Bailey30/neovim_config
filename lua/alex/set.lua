@@ -4,13 +4,24 @@ vim.opt.guicursor = ""
 vim.notify = require("notify")
 
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 
 vim.opt.showmode = false
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "javascript", "typescript", "json" },
+	callback = function()
+		vim.opt_local.expandtab = true -- spaces, not tabs
+		vim.opt_local.shiftwidth = 2 -- >> uses 2 spaces
+		vim.opt_local.tabstop = 2 -- a <Tab> is 2 spaces
+		vim.opt_local.softtabstop = 2 -- editing backspaces 2 spaces
+	end,
+})
+
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
@@ -39,6 +50,7 @@ vim.cmd(":setlocal spell spelllang=en_us")
 vim.lsp.set_log_level("debug")
 
 -- format on save
+--
 -- vim.cmd("autocmd BufWritePre * lua vim.lsp.buf.format()")
 -- vim.cmd("autocmd BufWritePre * lua vim.cmd('Neoformat')")
 

@@ -1,6 +1,10 @@
 -- local prettier = require("prettier")
-
+--
 -- prettier.setup({
+-- 	cli_options = {
+-- 		tab_width = 4,
+-- 	},
+--
 -- 	bin = "prettier", -- or `'prettierd'` (v0.23.3+)
 -- 	filetypes = {
 -- 		"css",

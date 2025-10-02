@@ -31,6 +31,9 @@ require("telescope").setup({
 				},
 			},
 		},
+		find_files = {
+			file_ignore_patterns = { "node_modules" },
+		},
 	},
 	extensions = {
 		file_browser = {

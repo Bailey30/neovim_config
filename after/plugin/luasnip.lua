@@ -28,62 +28,84 @@ local ms = ls.multi_snippet
 local k = require("luasnip.nodes.key_indexer").new_key
 
 -- keymaps
-vim.keymap.set({ "i" }, "<C-K>", function() ls.expand() end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-L>", function() ls.jump(1) end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(-1) end, { silent = true })
+vim.keymap.set({ "i" }, "<C-K>", function()
+	ls.expand()
+end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-L>", function()
+	ls.jump(1)
+end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-J>", function()
+	ls.jump(-1)
+end, { silent = true })
 
 -- snippets
 ls.add_snippets("all", {
-    s("ternary", {
-        -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
-        i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
-    }),
-    s("clg", {
-        t("console.log("), i(1), t(")")
-    }),
-    -- s({ trig = "try", name = "try/catch", dscr = "try{}catch(){}" }, {
-    --     t({ "", "try{" }),
-    --     i(1),
-    --     t({ "", "}" }),
-    --     t({ "", "catch(err:any){" }),
-    --     i(2),
-    --     t({ "", "}" })
-    -- }),
-    s({ trig = "try", name = "try/catch", description = "try{} catch(err:any){}}" }, fmt([[
+	s("ternary", {
+		-- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
+		i(1, "cond"),
+		t(" ? "),
+		i(2, "then"),
+		t(" : "),
+		i(3, "else"),
+	}),
+	s("clg", {
+		t("console.log("),
+		i(1),
+		t(")"),
+	}),
+	-- s({ trig = "try", name = "try/catch", dscr = "try{}catch(){}" }, {
+	--     t({ "", "try{" }),
+	--     i(1),
+	--     t({ "", "}" }),
+	--     t({ "", "catch(err:any){" }),
+	--     i(2),
+	--     t({ "", "}" })
+	-- }),
+	s(
+		{ trig = "try", name = "try/catch", description = "try{} catch(err:any){}}" },
+		fmt(
+			[[
     try {
         <>
     } catch (err:any) {
        console.log(<>, err)
     }
-    ]], {
-        i(1),
-        i(2)
-    }, {
-        delimiters = "<>"
-    }
-    )),
-    s({ trig = "sds", name = "css module classname" }, {
-        t("`${"), i(1), t("}`")
-    }),
-    s({ trig = "brr", name = "border 1px solid red" }, {
-        t("border: 1px solid red;")
-    }),
-    s({ trig = "jd", name = "JsDoc" }, {
-        t("/** * "), i(1), t(" **/")
-    })
+    ]],
+			{
+				i(1),
+				i(2),
+			},
+			{
+				delimiters = "<>",
+			}
+		)
+	),
+	s({ trig = "sds", name = "css module classname" }, {
+		t("`${"),
+		i(1),
+		t("}`"),
+	}),
+	s({ trig = "brr", name = "border 1px solid red" }, {
+		t("border: 1px solid red;"),
+	}),
+	s({ trig = "jd", name = "JsDoc" }, {
+		t("/** * "),
+		i(1),
+		t(" **/"),
+	}),
 })
 
 --
 -- configure completion plugin
-cmp.setup({
-    snippet = {
-        expand = function(args)
-            ls.lsp_expand(args.body)
-        end
-    },
-    sources = {
-        { name = "luasnip" },
-        { name = "nvim_lsp" }
-
-    }
-})
+-- cmp.setup({
+--     snippet = {
+--         expand = function(args)
+--             ls.lsp_expand(args.body)
+--         end
+--     },
+--     sources = {
+--         { name = "luasnip" },
+--         { name = "nvim_lsp" }
+--
+--     }
+-- })

@@ -1,5 +1,11 @@
 vim.g.mapleader = " "
+
+-- Prevents all leader commands in insert mode.
+vim.keymap.set("i", "<Space>", "<Space>", { nowait = true })
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+-- Remove wait before entering command mode.
+vim.keymap.set("n", ":", ":", { nowait = true })
 
 --move highlighted group
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -38,7 +44,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>")
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>")
+-- vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>")
 
 -- vim.keymap.set("n", "<leader><leader>", function()
 --     vim.cmd("so")
@@ -55,8 +61,15 @@ vim.keymap.set("n", "<leader><leader>", "/")
 --  vim.keymap.set("n", "sj", "<C-w>j")
 --    vim.keymap.set("n", "sl", "<C-w>l")
 --
-vim.keymap.set("n", "<A-,>", ":bprev<CR>")
-vim.keymap.set("n", "<A-.>", ":bnext<CR>")
+
+-- Buffer navigation
+local cokeline = require("cokeline/mappings")
+vim.keymap.set("n", "<A-,>", function()
+	cokeline.by_step("focus", -1)
+end)
+vim.keymap.set("n", "<A-.>", function()
+	cokeline.by_step("focus", 1)
+end)
 vim.keymap.set("n", "<A-q>", ":bd<CR>")
 
 -- split and navigate panes
@@ -74,6 +87,11 @@ vim.keymap.set("n", "<C-h>", "_")
 vim.keymap.set("n", "<S-h>", "b")
 vim.keymap.set("n", "<S-l>", "w")
 
+-- delete to end of line
+vim.keymap.set("n", "d<C-h>", "d0")
+-- delete to start of line
+vim.keymap.set("n", "d<C-l>", "d$")
+
 -- resize windows
 vim.keymap.set("n", "<A-0>", ":res +1<enter>")
 vim.keymap.set("n", "<A-9>", ":res -1<enter>")
@@ -84,13 +102,14 @@ vim.keymap.set("n", "<A-7>", ":vert res -2<enter>")
 vim.api.nvim_create_user_command("PS", "PackerSync", {})
 
 -- Insert mode mapping
-vim.api.nvim_set_keymap("n", ":f", ":find <CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", ":f", ":find <CR>", { noremap = true, silent = true })
 
 -- Visual mode mapping
-vim.api.nvim_set_keymap("v", ":f", ":find ", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("v", ":f", ":find ", { noremap = true, silent = true })
 
 -- Return to normal mode and save buffer
 vim.keymap.set({ "n", "v", "i" }, "<C-s>", "<esc>:w<enter>")
+vim.keymap.set({ "n", "v", "i" }, "<enter>", "<esc>:w<enter>")
 
 -- Jump to the next instance of the word that was just replaced and do the same replacement
 vim.keymap.set("n", "<leader>rn", "/<C-r>+<CR>.")
@@ -124,10 +143,17 @@ end)
 
 -- Copy current file path to clipboard.
 vim.keymap.set("n", "<leader>cfp", function()
-	local file_path = vim.fn.expand("%:p")
+	local file_path = vim.fn.expand("%:p:h")
 	vim.fn.setreg("*", file_path)
 	print("File path copied to clipboard: ", file_path)
-end)
+end, { silent = true })
+
+-- Copy current file name to clipboard.
+vim.keymap.set("n", "<leader>cfn", function()
+	local file_name = vim.fn.split(vim.fn.expand("%"), "\\")
+	vim.fn.setreg("*", file_name[#file_name])
+	print("File name copied to clipboard: ", file_name[#file_name])
+end, { silent = true })
 
 -- Enable cursor movement in insert mode using HJKL combined with ctrl.
 vim.keymap.set("i", "<C-h>", "<Left>")
@@ -136,3 +162,17 @@ vim.keymap.set("i", "<C-k>", "<Up>")
 vim.keymap.set("i", "<C-j>", "<Down>")
 
 vim.keymap.set("i", "<C-x>", "<Del>")
+
+-- Yank and put the "count" number of lines and comment out the yanked lines.
+vim.keymap.set("n", "ycc", function()
+	-- yank line
+	-- vim.v.count = "The count given for the last Normal mode command".
+	-- gcc = comment line.
+	-- '] = go to the end of the previously operated on or put text.
+	-- p = put
+	return "yy" .. vim.v.count1 .. "gcc']p"
+end, { remap = true, expr = true })
+
+vim.keymap.set("n", "yff", function()
+	return "v]Ml"
+end, { remap = true, expr = true })

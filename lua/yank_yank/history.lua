@@ -12,7 +12,6 @@ function History:push()
 	local stdpath = vim.fn.stdpath("state")
 	local yank = nvim_utils.get_register_contents()
 
-	print(vim.fn.index(self.config.menu.unformatted_lines, yank))
 	if vim.fn.index(self.config.menu.unformatted_lines, vim.fn.trim(yank, "\n")) == -1 then
 		vim.fn.writefile({ vim.fn.trim(yank, "\n") }, stdpath .. "/clipboard.txt", "a")
 	end

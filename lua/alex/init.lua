@@ -6,6 +6,9 @@ require("alex.statusline")
 require("window_title")
 require("autocommands")
 require("yank_yank").setup({})
+require("substitute")
+require("print_var")
+-- require("cursor")
 
 if vim.g.vscode then
 	require("alex.vscode")

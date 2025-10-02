@@ -1,7 +1,7 @@
-local get_hex = require('cokeline.hlgroups').get_hl_attr
+local get_hex = require("cokeline.hlgroups").get_hl_attr
 
 local function format(g)
-    return "#" .. string.format("%06x", g)
+	return "#" .. string.format("%06x", g)
 end
 
 local green = vim.g.terminal_color_2
@@ -27,81 +27,91 @@ local statusLine_bg = statusLineNC.bg and format(statusLineNC.bg) or nil
 
 local config = {
 
+	default_hl = {
+		fg = function(buffer)
+			return buffer.is_focused and normal_fg or comment_fg
+		end,
+		bg = function(buffer)
+			return buffer.is_focused and normal_bg or statusLine_bg
+		end,
+	},
 
-    default_hl = {
-        fg = function(buffer)
-            return
-                buffer.is_focused
-                and normal_fg
-                or comment_fg
-        end,
-        bg = function(buffer)
-            return
-                buffer.is_focused
-                and normal_bg
-                or statusLine_bg
-        end,
-    },
+	components = {
+		{
+			text = " ",
+			fg = function(buffer)
+				return buffer.is_modified and yellow or green
+			end,
+		},
+		{
+			text = function(buffer)
+				return ""
+			end,
+		},
+		{
+			text = function(buffer)
+				return ""
+			end,
+			fg = function(buffer)
+				return buffer.devicon.color
+			end,
+		},
+		{
+			text = function(buffer)
+				return ""
+			end,
+		},
+		{
+			text = function(buffer)
+				return buffer.unique_prefix
+			end,
+			-- fg = get_hex('Comment', 'fg'),
+			-- italic = true,
+		},
+		{
+			text = function(buffer)
+				if buffer.is_focused then
+					-- return "[ " .. buffer.filename .. " ]" .. " "
+				end
+				return buffer.filename .. " "
+			end,
+			fg = function(buffer)
+				if buffer.diagnostics.errors > 0 then
+					return "#C95157"
+				end
+				if buffer.is_modified then
+					return hlFont
+				end
+			end,
 
-    components = {
-        {
-            text = ' ',
-            fg = function(buffer)
-                return
-                    buffer.is_modified and yellow or green
-            end
-        },
-        {
-            text = function(buffer) return '' end,
-            -- buffer.index .
-        },
-        {
-            text = function(buffer) return '' end,
-            fg = function(buffer) return buffer.devicon.color end,
-        },
-        {
-            text = function(buffer) return '' end,
-        },
-        {
-            text = function(buffer) return buffer.unique_prefix end,
-            -- fg = get_hex('Comment', 'fg'),
-            -- italic = true,
-        },
-        {
-            text = function(buffer)
-                if buffer.is_focused then
-                    return "[ " .. buffer.filename .. " ]"
-                end
-                return buffer.filename
-            end,
-            fg = function(buffer)
-                if (buffer.diagnostics.errors > 0) then
-                    return '#C95157'
-                end
-                if buffer.is_modified then
-                    return hlFont
-                end
-            end,
-            style = function(buffer)
-                if buffer.is_focused then
-                    underline = true
-                end
-                return nil
-            end,
-            -- underline = function(buffer)
-            --     if buffer.is_focused then
-            --         return true
-            --     end
-            -- end,
-            bold = function(buffer)
-                if buffer.is_focused then
-                    return true
-                end
-            end
-        },
-        {
-            text = ' ',
-        },
-    },
+			underline = function(buffer)
+				if buffer.is_focused then
+					return true
+				end
+			end,
+			bold = function(buffer)
+				if buffer.is_focused then
+					return true
+				end
+			end,
+		},
+		{
+			text = function(buffer)
+				if buffer.is_focused then
+					return "󰅖"
+				else
+					return ""
+				end
+			end,
+			on_click = function(_, _, _, _, buffer)
+				if buffer.is_focused then
+					buffer:delete()
+				end
+			end,
+		},
+		{
+			text = " ",
+		},
+	},
 }
-require('cokeline').setup(config)
+require("cokeline").setup(config)

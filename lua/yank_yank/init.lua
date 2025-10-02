@@ -16,6 +16,8 @@ local Yank_yank = {
 }
 
 function Yank_yank.setup(opts)
+	print("Yank_yank setup.")
+	Yank_yank:yank_yank_keymaps()
 	config.setup(opts)
 	Yank_yank.config = config
 
@@ -161,15 +163,18 @@ function Yank_yank:set_keymaps()
 	end, menu.buf)
 end
 
-vim.keymap.set({ "n", "i" }, "<leader>pl", function()
-	Yank_yank.open()
-end)
+function Yank_yank:yank_yank_keymaps()
+	print("keymaps set")
+	vim.keymap.set({ "n" }, "<leader>pl", function()
+		Yank_yank.open()
+	end)
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		History:push()
-	end,
-})
+	vim.api.nvim_create_autocmd("TextYankPost", {
+		callback = function()
+			History:push()
+		end,
+	})
+end
 
 -- Yank_yank.setup()
 

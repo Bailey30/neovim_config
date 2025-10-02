@@ -16,6 +16,8 @@ local constant = get_hl("Constant")
 -- local statement_fg = format(statement.fg)
 local normal_fg = format(normal.fg)
 local normal_bg = format(normal.bg)
+local comment = get_hl("Comment")
+local comment_fg = format(comment.fg)
 -- local func = get_hl("Function")
 -- local function_fg = format(func.fg)
 -- local comment = get_hl("Comment")
@@ -97,10 +99,27 @@ local function lsp()
 		for _, client in ipairs(clients) do
 			table.insert(lsp_names, client.name)
 		end
-		return ":" .. table.concat(lsp_names, "|")
+		-- return ":" .. table.concat(lsp_names, "|")
+		return "  " .. table.concat(lsp_names, "|")
 	else
 		return ""
 	end
+end
+
+local function mode()
+	local mode = vim.api.nvim_get_mode().mode
+
+	local dict = {
+		i = "insert",
+		c = "command",
+		n = "normal",
+		v = "visual",
+		["\22"] = "visual block", -- CRTL+Q to enter
+	}
+	-- return vim.fn.toupper(dict[mode])
+	-- return vim.fn.toupper(dict[mode]:sub(1, 1))
+	-- return dict[mode]:sub(1, 1)
+	return dict[tostring(mode)]
 end
 
 local config = {
@@ -111,12 +130,10 @@ local config = {
 		globalstatus = true,
 	},
 	sections = {
-		lualine_a = { "mode" },
+		lualine_a = { { mode } },
+
 		lualine_b = {},
 		lualine_c = {
-			{
-				"diff",
-			},
 			{
 				"branch",
 				icon = "",
@@ -124,38 +141,32 @@ local config = {
 					left = 0,
 					right = 0,
 				},
-				fmt = function(str, ctx)
-					if str == "" then
+				fmt = function(branch, ctx)
+					if branch == "" then
 						return ""
 					end
-					return "" .. str .. ":"
+					-- return "" .. str .. ":"
+					return "" .. branch .. " "
 				end,
 				separator = "",
 			},
 			{
+				"diff",
+			},
+			{
 				"filename",
-				path = 1,
+				path = 3,
 				fmt = function(str, ctx)
 					return str
 				end,
-				padding = { left = 0, right = 1 },
+				shorting_target = 70,
+				padding = { left = 1, right = 1 },
 			},
 		},
 
 		lualine_x = { "" },
 		lualine_y = {},
 		lualine_z = {
-			{
-
-				"location",
-				fmt = function(str, ctx)
-					local line = vim.fn.line(".")
-					local col = vim.fn.col(".")
-					local total_lines = vim.fn.line("$")
-					return line .. ":" .. col .. "/" .. total_lines
-				end,
-			},
-
 			{
 				get_filetype,
 				fmt = function(str, ctx)
@@ -167,6 +178,17 @@ local config = {
 
 				lsp,
 				padding = { left = 0, right = 1 },
+			},
+			{
+				"location",
+				fmt = function(str, ctx)
+					local line = vim.fn.line(".")
+					local col = vim.fn.col(".")
+					local total_lines = vim.fn.line("$")
+					-- return line .. ":" .. col .. "/" .. total_lines
+					return "col " .. col .. " line " .. line .. " of " .. total_lines
+					-- return "col " .. col .. ", line " .. line .. " of " .. total_lines
+				end,
 			},
 		},
 	},

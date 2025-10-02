@@ -5,20 +5,13 @@ require("conform").setup({
 		typescriptreact = { "prettier" },
 		javascript = { "prettier" },
 		javascriptreact = { "prettier" },
-		json = { "prettierd" },
+		json = { "prettier" },
 		html = { "prettier" },
 		css = { "prettier" },
 		-- ["*"] = { "codespell" },
 		djangohtml = { "djlint" },
 		-- markdown = { { "remark" } },
 	},
-	-- formatters = {
-	--     prettier = {
-	--         command = "./prettier.json"
-	--         -- printiidth = 200
-	--         -- prepend_args = { "--single-quote" }
-	--     }
-	-- },
 	format_on_save = {
 		-- I recommend these options. See :help conform.format for details.
 		lsp_fallback = true,
@@ -26,9 +19,9 @@ require("conform").setup({
 	},
 })
 
--- require("conform").formatters.prettier = {
---     prepend_args = { "--print-width 400" }
--- }
+require("conform").formatters.prettier = {
+	prepend_args = { "--print-width 200" },
+}
 
 local function logTable(t, indent)
 	indent = indent or 0
